@@ -1,15 +1,19 @@
 import { Spinner } from "react-bootstrap";
 import usePostNewDiscipline from "../../../../hooks/usePostNewDiscipline";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import * as S from "./styles";
 import useFetchDisciplinesNames from "../../../../hooks/useFetchDisciplinesNames";
 import CreateArticles from "./CreateArticles";
+import { CurrentUser } from "../../../../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 export default function ManageDisciplines() {
   const [{ disciplinesNames, isDisciplinesNamesLoading }] =
     useFetchDisciplinesNames();
   const [title, setTitle] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
+  const { user } = useContext(CurrentUser);
+  const navigate = useNavigate();
 
   const [{ postNewDiscipline, isLoading, message }] = usePostNewDiscipline();
 
@@ -23,6 +27,9 @@ export default function ManageDisciplines() {
     window.location.reload();
   }
 
+  if (!user) {
+    navigate("/login");
+  }
   return (
     <S.DivContainer>
       <div>
