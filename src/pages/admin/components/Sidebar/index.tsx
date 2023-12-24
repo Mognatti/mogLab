@@ -16,6 +16,18 @@ const navLinks = [
     text: "Disciplinas",
     icon: <S.DisciplinesIcon size={22} />,
   },
+  {
+    id: 3,
+    to: "/admin/artigos",
+    text: "Artigos",
+    icon: <S.ArticleIcon size={22} />,
+  },
+  {
+    id: 4,
+    to: "/",
+    text: "Ir ao site",
+    icon: <S.WebsiteIcon size={22} />,
+  },
 ];
 
 export interface SidebarProps {

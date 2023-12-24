@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Disciplines } from "../types/globalTypes";
+import { DisciplinesProps } from "../types/globalTypes";
 
 export default function useFetchDisciplines() {
-  const [disciplines, setDisciplines] = useState<Disciplines[]>([]);
+  const [disciplines, setDisciplines] = useState<DisciplinesProps[]>([]);
   const [isDisciplinesLoading, setIsDisciplinesLoading] = useState(false);
   const disciplinesURL = "https://ill-blue-rooster-veil.cyclic.app/disciplines";
 

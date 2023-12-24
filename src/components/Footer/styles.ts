@@ -1,10 +1,10 @@
 import { styled } from "styled-components";
 
-export const FooterContainer = styled.footer`
-  display: flex;
+export const FooterContainer = styled.footer<{ path: string }>`
+  display: ${(props) => (props.path.includes("disciplinas/") ? "none" : "flex")};
   align-items: center;
   width: 100%;
-  height: 15vh;
+  height: 15svh;
   background-color: ${(props) => props.theme.colors.blue[500]};
   color: ${(props) => props.theme.colors.white[500]};
 `;

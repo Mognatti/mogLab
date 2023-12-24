@@ -16,13 +16,13 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import { useContext } from "react";
 import { CurrentUser } from "./context/authContext";
-
+import ManageArticles from "./pages/admin/components/ManageArticles";
 export default function AppRoutes() {
   const [{ theme, setTheme }] = useTheme(themeKey, lightTheme);
   const { user } = useContext(CurrentUser);
 
   const HeaderAndFooter = {
-    HTML: (
+    JSX: (
       <>
         <Header {...{ theme, setTheme }} />
         <Footer />
@@ -36,30 +36,16 @@ export default function AppRoutes() {
         <Global />
         {user && <Sidebar {...{ theme, setTheme }} />}
         <Routes>
-          <Route path="/" element={HeaderAndFooter.HTML}>
+          <Route path="/" element={HeaderAndFooter.JSX}>
             <Route index element={<Home />} />
             <Route path="/disciplinas" element={<StudyMainPage />} />
             <Route path="/disciplinas/:discipline" element={<Discipline />} />
-            <Route
-              path="/disciplinas/:discipline/:id"
-              element={
-                <div
-                  style={{
-                    height: "100svh",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  EM DESENVOLVIMENTO
-                </div>
-              }
-            />
             <Route path="/contact" element={<ContactMe />} />
             <Route path="/login" element={<Login />} />
           </Route>
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/disciplinas" element={<ManageDisciplines />} />
+          <Route path="/admin/artigos" element={<ManageArticles />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </Router>

@@ -9,15 +9,6 @@ export const MainContainer = styled.div`
   flex-direction: column;
 `;
 
-export const Container = styled.div`
-  margin: 5vh 4vw;
-  display: flex;
-`;
-
-export const BiologyRouteTitle = styled.h3`
-  width: fit-content;
-`;
-
 export const Title = styled.h3`
   margin-bottom: 2vh;
 `;
@@ -26,13 +17,12 @@ export const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-  gap: 1vh 0;
-  margin-bottom: 3vh;
-  margin-left: 4svw;
+  gap: 1svh 0;
+  margin: 2svh 0 2svh 0;
 `;
 
 export const Item = styled.li`
-  width: 31.9%;
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;

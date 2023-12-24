@@ -5,8 +5,10 @@ import useFetchDisciplinesNames from "../../hooks/useFetchDisciplinesNames";
 import Loader from "./Discipline/Loader";
 
 export default function StudyMainPage() {
-  const [{ disciplinesNames, isDisciplinesNamesLoading }] =
-    useFetchDisciplinesNames();
+  const [{ disciplinesNames, isDisciplinesNamesLoading }] = useFetchDisciplinesNames();
+  const sortedDisciplines = [...disciplinesNames].sort((a, b) => {
+    return a < b ? -1 : a > b ? 1 : 0;
+  });
 
   if (isDisciplinesNamesLoading) {
     return <Loader />;
@@ -16,11 +18,9 @@ export default function StudyMainPage() {
     <S.MainContainer>
       <S.Title>Disciplinas</S.Title>
       <S.List>
-        {disciplinesNames.map((discipline) => (
+        {sortedDisciplines.map((discipline) => (
           <S.Item key={discipline}>
-            <GS.StyledLink to={"/disciplinas/" + discipline.toLowerCase()}>
-              {discipline}
-            </GS.StyledLink>
+            <GS.StyledLink to={"/disciplinas/" + discipline.toLowerCase()}>📒 {discipline}</GS.StyledLink>
           </S.Item>
         ))}
       </S.List>

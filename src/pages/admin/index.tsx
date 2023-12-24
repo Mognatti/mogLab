@@ -1,19 +1,18 @@
 import * as S from "./styles";
 import Dashboard from "./components/Dashboard";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CurrentUser } from "../../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Admin() {
   const { user } = useContext(CurrentUser);
-  console.log(user);
+  const navigate = useNavigate();
 
-  if (!user) {
-    return (
-      <S.DivContainer>
-        <p>Para acessar essa página, faça login como administrador!</p>
-      </S.DivContainer>
-    );
-  }
+  useEffect(() => {
+    if (!user) {
+      return navigate("/login");
+    }
+  }, [user, navigate]);
 
   return (
     <S.DivContainer>

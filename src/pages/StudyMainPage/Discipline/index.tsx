@@ -1,52 +1,40 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useFetchDisciplines from "../../../hooks/useFetchDisciplines";
 import Loader from "./Loader";
 import NotFound from "../../NotFound";
+import { ArticleProps } from "../../../types/globalTypes";
+import { useState } from "react";
+import Article from "./Article";
+import StudySidebar from "./StudySidebar";
+import * as S from "./styles";
 
 export default function Discipline() {
   const [{ disciplines, isDisciplinesLoading }] = useFetchDisciplines();
   const { discipline } = useParams();
-  const selectedDiscipline = disciplines.find(
-    (item) => item.title.toLowerCase() === discipline
-  );
+  const selectedDiscipline = disciplines.find((item) => item.title.toLowerCase() === discipline);
+  const articleList = selectedDiscipline?.articles;
+  const [selectedArticle, setSelectedArticle] = useState<ArticleProps>();
 
   if (isDisciplinesLoading) {
     return <Loader />;
   } else if (!selectedDiscipline) {
     return <NotFound />;
+  } else if (articleList?.length == 0) {
+    return (
+      <S.Container>
+        <StudySidebar {...{ articleList, selectedArticle, setSelectedArticle }} />
+        <S.Warning>Disciplina ainda não possui artigos cadastrados, aguarde atualizações!</S.Warning>
+      </S.Container>
+    );
   }
-  console.log(disciplines);
-  console.log(selectedDiscipline);
 
   return (
     <>
-      {selectedDiscipline && (
-        <div
-          style={{
-            height: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
-          <h3>{selectedDiscipline.title}</h3>
-          <p>{selectedDiscipline.description}</p>
-          <ul>
-            {selectedDiscipline.articles
-              ? selectedDiscipline.articles.map((item) => (
-                  <li key={item.title}>
-                    <Link
-                      to={`/disciplinas/${discipline!.toLocaleLowerCase()}/${
-                        item.title
-                      }`}
-                    >
-                      {item.title}
-                    </Link>
-                  </li>
-                ))
-              : "A disciplina ainda não possui artigos cadastrados. Aguarde atualizações!"}
-          </ul>
-        </div>
+      {selectedDiscipline && articleList && (
+        <S.Container>
+          <StudySidebar {...{ articleList, selectedArticle, setSelectedArticle }} />
+          <Article {...(selectedArticle ?? articleList[0])} />
+        </S.Container>
       )}
     </>
   );

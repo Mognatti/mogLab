@@ -1,22 +1,14 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useContext, useEffect, useState } from "react";
-import { auth } from "../../config/firebase";
+import { useContext, useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { CurrentUser } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import * as S from "./styles";
-import * as GS from "../../styles/global";
-
-interface LoginProps {
-  e: React.MouseEvent<HTMLButtonElement>;
-  email: string;
-  password: string;
-}
+import useLogin from "../../hooks/useLogin";
 
 export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>();
+  const [{ isLoading, login }] = useLogin();
   const { user } = useContext(CurrentUser);
   const navigate = useNavigate();
 
@@ -26,47 +18,37 @@ export default function Login() {
     }
   }, [user, navigate]);
 
-  async function login({ e, email, password }: LoginProps) {
-    e.preventDefault();
-    try {
-      setIsLoading(true);
-      await signInWithEmailAndPassword(auth, email, password);
-      if (user) {
-        navigate("admin");
-        setIsLoading(false);
-      } else {
-        alert("Usuário não encontrado!");
-      }
-    } catch (error: unknown) {
-      alert(error);
-    }
-  }
-
   return (
-    <S.Form>
-      <label htmlFor="email"> Digite seu email: </label>
-      <input
-        id="email"
-        placeholder="email..."
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-
-      <label htmlFor="password"> Digite sua senha: </label>
-      <input
-        id="password"
-        placeholder="senha..."
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <GS.GlobalButton
-        type="submit"
-        onClick={(e) => login({ e, email, password })}
-      >
-        {isLoading ? <Spinner /> : "Entrar"}
-      </GS.GlobalButton>
-    </S.Form>
+    <S.Container>
+      <S.Form>
+        <span>O login é somente para criadores de artigos!</span>
+        <hr />
+        <label htmlFor="email"> Digite seu email: </label>
+        <S.Input
+          id="email"
+          placeholder="email@email.com"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <label htmlFor="password"> Digite sua senha: </label>
+        <S.Input
+          id="password"
+          placeholder="Senha..."
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <S.ErrorMessageDiv id="error-message"></S.ErrorMessageDiv>
+        <S.Button type="submit" onClick={(e) => login({ e, email, password })} disabled={!email || !password}>
+          {isLoading ? <Spinner /> : "Entrar"}
+        </S.Button>
+      </S.Form>
+      <S.ContentContainer>
+        <S.AuthImage src="/img/login_img.svg" />
+      </S.ContentContainer>
+    </S.Container>
   );
 }

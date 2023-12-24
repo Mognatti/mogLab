@@ -2,11 +2,14 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { IoIosHome } from "react-icons/io";
 import { SiBookstack } from "react-icons/si";
+import { TbWorldShare } from "react-icons/tb";
+import { PiArticleNyTimes } from "react-icons/pi";
 
 export const LinkText = styled.span`
-  display: none;
   opacity: 0;
-  transition: 450ms ease;
+  transition: all 450ms ease;
+  position: absolute;
+  left: -100px;
 `;
 
 export const ThemeSwitcherContainer = styled.li`
@@ -26,14 +29,16 @@ export const SidebarDiv = styled.div<{ path: string }>`
   left: 0;
   top: 0;
   transition: 350ms;
-  background-color: ${(props) => props.theme.colors.blue[300]};
+  background-color: ${(props) => props.theme.colors.blue[500]};
   z-index: 99;
   &:hover {
     width: 15vw;
   }
   &:hover ${LinkText} {
     opacity: 1;
-    display: flex;
+    margin: 0;
+    position: relative;
+    left: 0;
   }
   &:hover ${ThemeSwitcherContainer} {
     right: -30px;
@@ -52,13 +57,14 @@ export const NavLink = styled(Link)`
   align-items: center;
   justify-items: center;
   gap: 1vw;
+  color: ${(props) => props.theme.colors.white[500]};
 
   &:hover {
     margin-left: 1vw;
   }
 `;
 
-export const HomeIcon = styled(IoIosHome)`
-  color: ${(props) => props.theme.colors.green};
-`;
+export const HomeIcon = styled(IoIosHome)``;
 export const DisciplinesIcon = styled(SiBookstack)``;
+export const ArticleIcon = styled(PiArticleNyTimes)``;
+export const WebsiteIcon = styled(TbWorldShare)``;

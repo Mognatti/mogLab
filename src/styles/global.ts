@@ -11,9 +11,7 @@ html{
 
 body{
     background-color: ${(props) =>
-      props.theme.title == "dark"
-        ? props.theme.colors.black[400]
-        : props.theme.colors.white[200]};
+      props.theme.title == "dark" ? props.theme.colors.black[400] : props.theme.colors.white[200]};
     color: ${(props) => props.theme.colors.black[900]};
 }
 
@@ -39,9 +37,7 @@ a{
 /* Scroll bar styles */
 ::-webkit-scrollbar-thumb{
     background: ${(props) =>
-      props.theme.title == "dark"
-        ? props.theme.colors.yellow[500]
-        : props.theme.colors.green[500]};
+      props.theme.title == "dark" ? props.theme.colors.yellow[500] : props.theme.colors.green[500]};
     width: 1px;
    }
 
@@ -75,19 +71,45 @@ export const StyledLink = styled(Link)`
 `;
 
 export const GlobalButton = styled.button`
-  padding: 8px;
   border-radius: 8px;
-  background-color: transparent;
-  transition: 350ms ease;
-  outline: 1px solid ${(props) => props.theme.colors.yellow[500]};
   border: none;
+  padding: 8px;
   width: 300px;
-  color: ${(props) =>
-    props.theme.title == "dark"
-      ? props.theme.colors.white[500]
-      : props.theme.colors.black[500]};
+  background-color: transparent;
+  color: ${(props) => (props.theme.title == "dark" ? props.theme.colors.white[500] : props.theme.colors.black[500])};
+  outline: 1px solid ${(props) => props.theme.colors.yellow[500]};
+  transition: 350ms ease;
   &:hover {
     background-color: ${(props) => props.theme.colors.yellow[500]};
-    outline: 1px solid ${(props) => props.theme.colors.yellow[500]};
+  }
+  &:disabled {
+    opacity: ${(props) => (props.theme.title == "dark" ? "0.5" : "0.7")};
+    &:hover {
+      background-color: transparent;
+      cursor: not-allowed;
+    }
+  }
+`;
+
+export const GlobalInput = styled.input`
+  border: none;
+  border-radius: 8px;
+  outline: 1px solid ${(props) => props.theme.colors.yellow[500]};
+  background: transparent;
+  color: ${(props) => (props.theme.title === "dark" ? props.theme.colors.white[500] : props.theme.colors.black[500])};
+  padding: 8px;
+  box-shadow: 3px 3px 5px
+    ${(props) => (props.theme.title === "dark" ? props.theme.colors.yellow[300] : "rgba(0, 0, 0, 0.8)")};
+  transition: 350ms;
+
+  &:focus {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 10px
+      ${(props) => (props.theme.title === "dark" ? props.theme.colors.yellow[300] : "rgba(0, 0, 0, 0.8)")};
+  }
+  &:disabled {
+    opacity: 0.7;
+    box-shadow: 0px 0px 15px rgb(255, 0, 0);
+    cursor: not-allowed;
   }
 `;

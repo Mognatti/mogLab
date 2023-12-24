@@ -1,7 +1,8 @@
 import { styled } from "styled-components";
 import { StyledLink } from "../../styles/global";
+import { MdAdminPanelSettings } from "react-icons/md";
 
-export const PageHeader = styled.header<{ scrolling: boolean }>`
+export const PageHeader = styled.header<{ scrolling: boolean; path: string }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -9,13 +10,13 @@ export const PageHeader = styled.header<{ scrolling: boolean }>`
   padding: 0;
   width: 100%;
   height: 8vh;
-  display: flex;
+  /* removes display if user is on a page that uses a sidebar */
+  display: ${(props) => (props.path.includes("disciplinas/") ? "none" : "flex")};
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   transition: 350ms;
-  background-color: ${(props) =>
-    props.scrolling ? props.theme.colors.blue[500] : "transparent"};
+  background-color: ${(props) => (props.scrolling ? props.theme.colors.blue[500] : "transparent")};
   z-index: 999;
 `;
 
@@ -45,9 +46,7 @@ export const List = styled.ul`
   gap: 0 4vw;
 `;
 
-export const NavLink = styled(StyledLink)<{
-  scrolling: boolean;
-}>`
+export const NavLink = styled(StyledLink)<{ scrolling: boolean }>`
   color: ${(props) =>
     props.theme.title === "dark"
       ? props.theme.colors.white[900]
@@ -55,3 +54,5 @@ export const NavLink = styled(StyledLink)<{
       ? props.theme.colors.white[500]
       : props.theme.colors.black[500]};
 `;
+
+export const AdminIcon = styled(MdAdminPanelSettings)``;

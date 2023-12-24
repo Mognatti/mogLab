@@ -1,12 +1,15 @@
 import type { Timestamp } from "firebase/firestore";
 
-export interface Disciplines {
+export interface DisciplinesProps {
   title: string;
   description: string;
-  articles?: {
-    author: string;
-    changed: Timestamp;
-    content: string;
-    title: string;
-  }[];
+  articles?: ArticleProps[];
+}
+
+export interface ArticleProps {
+  title: string;
+  author: string;
+  content: string;
+  changed?: Timestamp;
+  id?: string;
 }
