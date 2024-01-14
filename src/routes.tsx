@@ -14,13 +14,16 @@ import ManageDisciplines from "./pages/admin/components/ManageDisciplines";
 import Sidebar from "./pages/admin/components/Sidebar";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CurrentUser } from "./context/authContext";
 import ManageArticles from "./pages/admin/components/ManageArticles";
 import Article from "./pages/StudyMainPage/Discipline/Article";
+import { ArticleProps } from "./types/globalTypes";
 
 export default function AppRoutes() {
   const [{ theme, setTheme }] = useTheme(themeKey, lightTheme);
+  const [selectedArticle, setSelectedArticle] = useState<ArticleProps | undefined>();
+
   const { user } = useContext(CurrentUser);
 
   const HeaderAndFooter = {
@@ -41,8 +44,8 @@ export default function AppRoutes() {
           <Route path="/" element={HeaderAndFooter.JSX}>
             <Route index element={<Home />} />
             <Route path="/disciplinas" element={<StudyMainPage />} />
-            <Route path="/disciplinas/:discipline" element={<Discipline />} />
-            <Route path="/disciplinas/:discipline/:article" element={<Article />} />
+            <Route path="/disciplinas/:discipline" element={<Discipline setSelectedArticle={setSelectedArticle} />} />
+            <Route path="/disciplinas/:discipline/:article" element={<Article selectedArticle={selectedArticle} />} />
             <Route path="/contact" element={<ContactMe />} />
             <Route path="/login" element={<Login />} />
           </Route>

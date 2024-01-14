@@ -6,7 +6,11 @@ import { ArticleProps } from "../../../types/globalTypes";
 import * as S from "./styles";
 import capitalizeWords from "../../../functions/capitalizeWords";
 
-export default function Discipline() {
+interface DisciplineProps {
+  setSelectedArticle: React.Dispatch<React.SetStateAction<ArticleProps | undefined>>;
+}
+
+export default function Discipline({ setSelectedArticle }: DisciplineProps) {
   const [{ disciplines, isDisciplinesLoading }] = useFetchDisciplines();
   const { discipline } = useParams();
   const selectedDiscipline = disciplines.find((item) => item.title.toLowerCase() === discipline);
@@ -27,6 +31,7 @@ export default function Discipline() {
   }
 
   function handleClick(article: ArticleProps) {
+    setSelectedArticle(article);
     const currentPath = location.pathname;
     navigate(`${currentPath}/${article.title}`);
   }
