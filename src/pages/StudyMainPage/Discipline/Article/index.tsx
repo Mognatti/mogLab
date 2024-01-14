@@ -2,6 +2,8 @@ import styled from "styled-components";
 import NotFound from "../../../NotFound";
 import capitalizeWords from "../../../../functions/capitalizeWords";
 import { ArticleProps } from "../../../../types/globalTypes";
+import useWindowScroll from "../../../../hooks/useWindowScroll";
+import { FaArrowUp } from "react-icons/fa";
 
 const Container = styled.div`
   margin: 3svh 1svw;
@@ -20,11 +22,32 @@ const AuthorParagraph = styled.p`
   padding-bottom: 2svh;
 `;
 
+const ArrowUpDiv = styled.div`
+  background-color: ${(props) => props.theme.colors.yellow[500]};
+  position: fixed;
+  right: 2svw;
+  bottom: 5svh;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 8px;
+  transition: 350ms;
+  &:hover {
+    transform: scale(1.1);
+  }
+  * {
+    cursor: pointer;
+  }
+`;
+const ArrowUp = styled(FaArrowUp)`
+  color: ${(props) => props.theme.colors.blue[400]};
+`;
+
 interface ArticleComponentProps {
   selectedArticle: ArticleProps | undefined;
 }
 
 export default function Article({ selectedArticle }: ArticleComponentProps) {
+  const [{ Ypos, scrollToTop }] = useWindowScroll();
   if (!selectedArticle) {
     return <NotFound />;
   }
@@ -36,6 +59,13 @@ export default function Article({ selectedArticle }: ArticleComponentProps) {
         <ArticleContent dangerouslySetInnerHTML={{ __html: selectedArticle.content }}></ArticleContent>
         <AuthorParagraph>{`Autor - ${selectedArticle.author}`}</AuthorParagraph>
       </article>
+      {Ypos > 150 && (
+        <ArrowUpDiv>
+          <abbr title="Voltar para o topo">
+            <ArrowUp onClick={() => scrollToTop()} size="25" />
+          </abbr>
+        </ArrowUpDiv>
+      )}
     </Container>
   );
 }
