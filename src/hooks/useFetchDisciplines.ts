@@ -4,7 +4,7 @@ import { DisciplinesProps } from "../types/globalTypes";
 export default function useFetchDisciplines() {
   const [disciplines, setDisciplines] = useState<DisciplinesProps[]>([]);
   const [isDisciplinesLoading, setIsDisciplinesLoading] = useState(false);
-  const disciplinesURL = "https://ill-blue-rooster-veil.cyclic.app/disciplines";
+  const disciplinesURL = `${import.meta.env.VITE_API_BASE_URL}/disciplines`;
 
   useEffect(() => {
     async function fetchDisciplines() {
@@ -20,7 +20,28 @@ export default function useFetchDisciplines() {
       }
     }
     fetchDisciplines();
-  }, []);
+  }, [disciplinesURL]);
 
-  return [{ disciplines, isDisciplinesLoading }];
+  async function deleteDiscipline(id: string) {
+    try {
+      setIsDisciplinesLoading(true);
+      const res = await fetch(`${disciplinesURL}/discipline/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: id }),
+      });
+      if (res.ok) {
+        setIsDisciplinesLoading(false);
+        alert("Disciplina deletada com sucesso!");
+        window.location.reload();
+      } else {
+        alert("Algo deu errado ao deletar a disciplina!");
+      }
+    } catch (error) {
+      setIsDisciplinesLoading(false);
+      console.log(error);
+    }
+  }
+
+  return [{ disciplines, isDisciplinesLoading, deleteDiscipline }];
 }

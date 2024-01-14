@@ -1,7 +1,9 @@
+import { DisciplineNameAndId } from "../../../../../../types/globalTypes";
+
 interface DisciplineSelectorProps {
   selectedDiscipline: string;
   setSelectedDiscipline: React.Dispatch<React.SetStateAction<string>>;
-  disciplinesNames: string[];
+  disciplinesNames: DisciplineNameAndId[];
 }
 
 export default function DisciplineSelector({
@@ -10,15 +12,11 @@ export default function DisciplineSelector({
   disciplinesNames,
 }: Readonly<DisciplineSelectorProps>) {
   return (
-    <select
-      id="discipline"
-      value={selectedDiscipline}
-      onChange={(e) => setSelectedDiscipline(e.target.value)}
-    >
+    <select id="discipline" value={selectedDiscipline} onChange={(e) => setSelectedDiscipline(e.target.value)}>
       <option value={""}>Selecione uma disciplina</option>
       {disciplinesNames.map((discipline) => (
-        <option key={discipline} value={discipline}>
-          {discipline}
+        <option key={discipline.id} value={discipline.title}>
+          {discipline.title}
         </option>
       ))}
     </select>

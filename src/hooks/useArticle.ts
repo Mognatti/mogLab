@@ -6,7 +6,7 @@ export default function useArticle() {
   const [responseMessage, setResponseMessage] = useState<string>("");
 
   async function postNewArticle(discipline: string, article: ArticleProps) {
-    const URL = `https://ill-blue-rooster-veil.cyclic.app/disciplines/${discipline}/articles`;
+    const URL = `${import.meta.env.VITE_API_BASE_URL}/disciplines/${discipline}/articles`;
     if (!article.author || !article.content || !article.title || !discipline) {
       return alert("Todos os campos devem estar preenchidos!");
     }
@@ -37,7 +37,7 @@ export default function useArticle() {
   }
 
   async function updateArticle(discipline: string, article: ArticleProps) {
-    const URL = `https://ill-blue-rooster-veil.cyclic.app/disciplines/${discipline}/articles`;
+    const URL = `${import.meta.env.VITE_API_BASE_URL}/disciplines/${discipline}/articles`;
     if (!article.author || !article.content || !article.title || !discipline) {
       return alert("Todos os campos devem estar preenchidos!");
     }
@@ -54,12 +54,12 @@ export default function useArticle() {
           id: article.id,
         }),
       });
-      setResponseMessage(`Artigo Atualizado com sucesso!`);
       setIsLoading(false);
+      return `Artigo Atualizado com sucesso!`;
     } catch (error) {
-      setResponseMessage("Algo deu errado e o artigo não foi atualizado!");
       console.log(error);
       setIsLoading(false);
+      return "Algo deu errado e o artigo não foi atualizado!";
     } finally {
       setIsLoading(false);
       setTimeout(() => {

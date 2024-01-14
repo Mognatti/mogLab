@@ -11,7 +11,7 @@ export default function useFetchArticles() {
   const [isArticlesListLoading, setIsArticlesListLoading] = useState<boolean>();
 
   async function fetchArticles(discipline: string) {
-    const URL = `https://ill-blue-rooster-veil.cyclic.app/disciplines/${discipline}/articles`;
+    const URL = `${import.meta.env.VITE_API_BASE_URL}/disciplines/${discipline}/articles`;
     try {
       setIsArticlesListLoading(true);
       const response = await fetch(URL);

@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { StyledLink } from "../../styles/global";
 import { MdAdminPanelSettings } from "react-icons/md";
 
-export const PageHeader = styled.header<{ scrolling: boolean; path: string }>`
+export const PageHeader = styled.header<{ scrolling: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -10,8 +10,7 @@ export const PageHeader = styled.header<{ scrolling: boolean; path: string }>`
   padding: 0;
   width: 100%;
   height: 8vh;
-  /* removes display if user is on a page that uses a sidebar */
-  display: ${(props) => (props.path.includes("disciplinas/") ? "none" : "flex")};
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;

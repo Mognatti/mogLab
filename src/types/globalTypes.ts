@@ -4,6 +4,12 @@ export interface DisciplinesProps {
   title: string;
   description: string;
   articles?: ArticleProps[];
+  id: string;
+}
+
+export interface DisciplineNameAndId {
+  id: string;
+  title: string;
 }
 
 export interface ArticleProps {

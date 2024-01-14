@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
+import { DisciplineNameAndId } from "../types/globalTypes";
 
 export default function useFetchDisciplinesNames() {
-  const [disciplinesNames, setDisciplinesNames] = useState<string[]>([]);
-  const [isDisciplinesNamesLoading, setIsDisciplinesNamesLoading] =
-    useState<boolean>();
-  const disciplinesNamesURL =
-    "https://ill-blue-rooster-veil.cyclic.app/disciplines/names";
+  const [disciplinesNames, setDisciplinesNames] = useState<DisciplineNameAndId[]>([]);
+  const [isDisciplinesNamesLoading, setIsDisciplinesNamesLoading] = useState<boolean>(false);
+  const disciplinesNamesURL = `${import.meta.env.VITE_API_BASE_URL}/disciplines/names`;
 
   useEffect(() => {
     async function fetchDisciplinesNames() {
@@ -25,7 +24,7 @@ export default function useFetchDisciplinesNames() {
       }
     }
     fetchDisciplinesNames();
-  }, []);
+  }, [disciplinesNamesURL]);
 
   return [{ disciplinesNames, isDisciplinesNamesLoading }];
 }

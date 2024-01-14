@@ -3,6 +3,8 @@ import * as GS from "../../styles/global";
 import BiologyRoute from "./components/BiologyRoute";
 import useFetchDisciplinesNames from "../../hooks/useFetchDisciplinesNames";
 import Loader from "./Discipline/Loader";
+import capitalizeWords from "../../functions/capitalizeWords";
+import { SiBookstack } from "react-icons/si";
 
 export default function StudyMainPage() {
   const [{ disciplinesNames, isDisciplinesNamesLoading }] = useFetchDisciplinesNames();
@@ -19,8 +21,13 @@ export default function StudyMainPage() {
       <S.Title>Disciplinas</S.Title>
       <S.List>
         {sortedDisciplines.map((discipline) => (
-          <S.Item key={discipline}>
-            <GS.StyledLink to={"/disciplinas/" + discipline.toLowerCase()}>📒 {discipline}</GS.StyledLink>
+          <S.Item key={discipline.id}>
+            <GS.StyledLink to={"/disciplinas/" + discipline.title.toLowerCase()}>
+              <S.LinkContainer>
+                <SiBookstack />
+                {capitalizeWords(discipline.title)}
+              </S.LinkContainer>
+            </GS.StyledLink>
           </S.Item>
         ))}
       </S.List>

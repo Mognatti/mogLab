@@ -1,17 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useFetchDisciplinesNames from "../../../../hooks/useFetchDisciplinesNames";
-import Loader from "../../../StudyMainPage/Discipline/Loader";
 import CreateArticles from "./CreateArticles";
 import * as S from "./styles";
 import EditArticles from "./EditArticles";
+import { CurrentUser } from "../../../../context/authContext";
+import AuthRedirectControl from "../AuthRedirectControl";
 
 export default function ManageArticles() {
   const [{ disciplinesNames, isDisciplinesNamesLoading }] = useFetchDisciplinesNames();
   const [createArticle, setCreateArticle] = useState<boolean>(true);
+  const { user } = useContext(CurrentUser);
 
-  if (isDisciplinesNamesLoading) {
-    return <Loader />;
+  if (!user) {
+    return <AuthRedirectControl user={user} args={[isDisciplinesNamesLoading]} />;
   }
+
   return (
     <S.Container>
       <S.FieldSet>

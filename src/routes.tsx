@@ -17,6 +17,8 @@ import Login from "./pages/Login";
 import { useContext } from "react";
 import { CurrentUser } from "./context/authContext";
 import ManageArticles from "./pages/admin/components/ManageArticles";
+import Article from "./pages/StudyMainPage/Discipline/Article";
+
 export default function AppRoutes() {
   const [{ theme, setTheme }] = useTheme(themeKey, lightTheme);
   const { user } = useContext(CurrentUser);
@@ -40,6 +42,7 @@ export default function AppRoutes() {
             <Route index element={<Home />} />
             <Route path="/disciplinas" element={<StudyMainPage />} />
             <Route path="/disciplinas/:discipline" element={<Discipline />} />
+            <Route path="/disciplinas/:discipline/:article" element={<Article />} />
             <Route path="/contact" element={<ContactMe />} />
             <Route path="/login" element={<Login />} />
           </Route>

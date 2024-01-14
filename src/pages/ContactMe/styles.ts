@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { GlobalButton } from "../../styles/global";
 
 export const Container = styled.div`
   display: flex;
@@ -36,12 +37,12 @@ export const BookImage = styled.img`
   width: 28vw;
   position: absolute;
   left: 2vw;
-  bottom: 5vh;
 `;
 
 export const ScientisImg = styled.img`
   width: 31vw;
   position: absolute;
   right: 2vw;
-  bottom: 5vh;
 `;
+
+export const Button = styled(GlobalButton)``;

@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as S from "./styles";
 import { normalizePhone } from "../../functions/normalizePhone";
 import { InputType } from "./types/types";
 import bookReadingImg from "/img/book_reading.png";
 import scientistGirlImg from "/img/scientist_girl.png";
+import useSendEmail from "../../hooks/useSendEmail";
+import { Spinner } from "react-bootstrap";
 
 export default function ContactMe() {
-  const [phone, setPhone] = useState<string>();
-  const [name, setName] = useState<string>();
-  const [email, setEmail] = useState<string>();
-  const [message, setMessage] = useState<string>();
+  const [phone, setPhone] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+  const errorDivRef = useRef<HTMLDivElement | null>(null);
+  const [{ isSending, sendEmail }] = useSendEmail();
 
   const inputData = [
     {
@@ -38,10 +42,7 @@ export default function ContactMe() {
     },
   ];
 
-  function handleChange(
-    e: React.ChangeEvent<HTMLInputElement>,
-    input: InputType
-  ) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>, input: InputType) {
     if (input.name === "tel") {
       const formattedPhone = normalizePhone(e.target.value);
       input.valueSet(formattedPhone);
@@ -50,15 +51,32 @@ export default function ContactMe() {
     }
   }
 
-  console.log(phone);
+  function buttonControl() {
+    if (!name || name.length < 3 || name.length > 15 || !email || !phone || phone.length !== 15 || !message) {
+      return true;
+    }
+  }
+
+  useEffect(() => {
+    if (name && errorDivRef.current && name.length > 15) {
+      errorDivRef.current.innerHTML = "<p>O nome deve ter até 15 caracteres!</p>";
+    } else if (errorDivRef.current) {
+      errorDivRef.current.innerHTML = "";
+    }
+  }, [name]);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    await sendEmail(name, email, phone, message, e);
+  }
 
   return (
     <S.Container>
       <h3>Entre em contato!</h3>
-      <S.Form>
+      <S.Form onSubmit={(e) => handleSubmit(e)}>
         {inputData.map((input) => (
           <S.Input
             message={input.name === "message"}
+            required
             key={input.id}
             type={input.type}
             placeholder={input.placeholder}
@@ -72,7 +90,10 @@ export default function ContactMe() {
           name="user-message"
           placeholder="Digite sua Mensagem..."
         />
-        <button>Enviar!</button>
+        <div ref={errorDivRef}></div>
+        <S.Button disabled={buttonControl()} type="submit">
+          {isSending ? <Spinner size="sm" /> : "Enviar!"}
+        </S.Button>
       </S.Form>
       <S.BookImage src={bookReadingImg} alt="book_reading_image" />
       <S.ScientisImg src={scientistGirlImg} alt="book_reading_image" />

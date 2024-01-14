@@ -1,19 +1,18 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useFetchDisciplines from "../../../hooks/useFetchDisciplines";
 import Loader from "./Loader";
 import NotFound from "../../NotFound";
 import { ArticleProps } from "../../../types/globalTypes";
-import { useState } from "react";
-import Article from "./Article";
-import StudySidebar from "./StudySidebar";
 import * as S from "./styles";
+import capitalizeWords from "../../../functions/capitalizeWords";
 
 export default function Discipline() {
   const [{ disciplines, isDisciplinesLoading }] = useFetchDisciplines();
   const { discipline } = useParams();
   const selectedDiscipline = disciplines.find((item) => item.title.toLowerCase() === discipline);
   const articleList = selectedDiscipline?.articles;
-  const [selectedArticle, setSelectedArticle] = useState<ArticleProps>();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   if (isDisciplinesLoading) {
     return <Loader />;
@@ -22,18 +21,44 @@ export default function Discipline() {
   } else if (articleList?.length == 0) {
     return (
       <S.Container>
-        <StudySidebar {...{ articleList, selectedArticle, setSelectedArticle }} />
-        <S.Warning>Disciplina ainda não possui artigos cadastrados, aguarde atualizações!</S.Warning>
+        <S.Warning>A disciplina ainda não possui artigos cadastrados, aguarde atualizações!</S.Warning>
       </S.Container>
     );
+  }
+
+  function handleClick(article: ArticleProps) {
+    const currentPath = location.pathname;
+    navigate(`${currentPath}/${article.title}`);
   }
 
   return (
     <>
       {selectedDiscipline && articleList && (
         <S.Container>
-          <StudySidebar {...{ articleList, selectedArticle, setSelectedArticle }} />
-          <Article {...(selectedArticle ?? articleList[0])} />
+          <h3>Artigos</h3>
+          <br />
+          <S.List>
+            {articleList.map((article) => (
+              <S.TiltDiv
+                key={article.id}
+                glareMaxOpacity={0.1}
+                glareEnable
+                glareColor="#FFF"
+                glarePosition="all"
+                glareBorderRadius="5px"
+              >
+                <S.Card onClick={() => handleClick(article)}>
+                  <h4>{capitalizeWords(article.title)}</h4>
+                  <hr />
+                  <div dangerouslySetInnerHTML={{ __html: article.content.slice(0, 150) + "..." }}></div>
+                  <hr />
+                  <S.AuthorContainer>
+                    <S.Author>Autor - {article.author}</S.Author>
+                  </S.AuthorContainer>
+                </S.Card>
+              </S.TiltDiv>
+            ))}
+          </S.List>
         </S.Container>
       )}
     </>

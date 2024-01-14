@@ -2,12 +2,12 @@ import { useState } from "react";
 
 export default function usePostNewDiscipline() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   async function postNewDiscipline(title: string, desc: string) {
-    const URL = "https://ill-blue-rooster-veil.cyclic.app/disciplines/";
+    const URL = `${import.meta.env.VITE_API_BASE_URL}/disciplines/`;
     if (title === "" || desc === "") {
-      return setMessage("Insira um título e uma descrição para a disciplina");
+      return setErrorMessage("Insira um título e uma descrição para a disciplina");
     }
     try {
       setIsLoading(true);
@@ -19,17 +19,13 @@ export default function usePostNewDiscipline() {
           description: desc,
         }),
       });
-      setMessage(
-        `Disciplina cadastrada com sucesso: \n title: ${title} description: ${desc}`
-      );
       setIsLoading(false);
     } catch (error) {
-      setMessage("Algo deu errado!");
       console.log(error);
       setIsLoading(false);
     } finally {
       setIsLoading(false);
     }
   }
-  return [{ isLoading, message, postNewDiscipline }];
+  return [{ isLoading, errorMessage, postNewDiscipline }];
 }

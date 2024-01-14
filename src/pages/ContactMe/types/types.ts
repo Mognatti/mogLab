@@ -3,6 +3,6 @@ export interface InputType {
   name: string;
   type: string;
   placeholder: string;
-  value: string | undefined;
-  valueSet: React.Dispatch<React.SetStateAction<string | undefined>>;
+  value: string;
+  valueSet: React.Dispatch<React.SetStateAction<string>>;
 }

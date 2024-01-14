@@ -1,54 +1,77 @@
 import { Spinner } from "react-bootstrap";
-import usePostDiscipline from "../../../../hooks/usePostDiscipline";
 import { useContext, useEffect, useState } from "react";
 import * as S from "./styles";
 import useFetchDisciplinesNames from "../../../../hooks/useFetchDisciplinesNames";
 import { CurrentUser } from "../../../../context/authContext";
-import { useNavigate } from "react-router-dom";
+import useFetchDisciplines from "../../../../hooks/useFetchDisciplines";
+import DefaultModal from "../Modal";
+import RegisteredDisciplines from "./Components/RegisteredDisciplines";
+import DeleteDiscipline from "./Components/DeleteDiscipline";
+import CreateDiscipline from "./Components/CreateDisciplines";
+import AuthRedirectControl from "../AuthRedirectControl";
 
 export default function ManageDisciplines() {
   const [{ disciplinesNames, isDisciplinesNamesLoading }] = useFetchDisciplinesNames();
+  const [{ deleteDiscipline, isDisciplinesLoading }] = useFetchDisciplines();
+  const [confirmDeleteModal, setConfirmDeleteModal] = useState(false);
+  const [isDeleteButtonDisabled, setIsDeleteButtonDisabled] = useState(true);
   const [title, setTitle] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
+  const [deleteId, setDeleteId] = useState("");
   const { user } = useContext(CurrentUser);
-  const navigate = useNavigate();
 
-  const [{ postNewDiscipline, isLoading, message }] = usePostDiscipline();
-
-  async function handleClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  async function handleDeleteDiscipline(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
-    await postNewDiscipline(title, desc);
-    setTitle("");
-    setDesc("");
-    window.location.reload();
+    await deleteDiscipline(deleteId);
   }
 
   useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-  }, [user, navigate]);
+    setIsDeleteButtonDisabled(true);
+    setTimeout(() => {
+      setIsDeleteButtonDisabled(false);
+    }, 5000);
+  }, [confirmDeleteModal]);
+
+  if (!user) {
+    return <AuthRedirectControl user={user} args={[isDisciplinesNamesLoading, isDisciplinesLoading]} />;
+  }
 
   return (
-    <S.DivContainer>
-      <S.Form>
-        <h4>Criador de disciplinas</h4>
-        <S.Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Nome da disciplina..." />
-        <S.TextArea value={desc} onChange={(e) => setDesc(e.target.value)} placeholder="Descrição da disciplina..." />
-        <S.Button onClick={(e) => handleClick(e)}>{isLoading ? <Spinner /> : "Cadastrar"}</S.Button>
-        {message && <p>{message}</p>}
-      </S.Form>
+    <>
+      <DefaultModal modalOpen={confirmDeleteModal} setModalOpen={setConfirmDeleteModal}>
+        <S.ModalDiv>
+          <h3>Você irá deletar a disciplina</h3>
+          <h4>Tem certeza que deseja continuar?</h4>
+          <S.ModalButtonDiv>
+            <S.Button
+              onClick={() => {
+                setConfirmDeleteModal(false);
+                setDeleteId("");
+              }}
+            >
+              Cancelar
+            </S.Button>
+            <span>Essa ação não poderá ser desfeita e todos os artigos da disciplina serão perdidos!</span>
+            <S.ConfirmDeleteButton disabled={isDeleteButtonDisabled} onClick={(e) => handleDeleteDiscipline(e)}>
+              {isDisciplinesLoading || isDeleteButtonDisabled ? <Spinner size="sm" /> : "Sim, tenho certeza!"}
+            </S.ConfirmDeleteButton>
+          </S.ModalButtonDiv>
+        </S.ModalDiv>
+      </DefaultModal>
+      <RegisteredDisciplines
+        isDisciplinesNamesLoading={isDisciplinesNamesLoading}
+        disciplinesNames={disciplinesNames}
+      />
       <hr />
-      <div>
-        <h3>Disciplinas Cadastradas</h3>
-        <S.List>
-          {isDisciplinesNamesLoading ? (
-            <Spinner size="sm" />
-          ) : (
-            disciplinesNames.map((discipline) => <S.Item key={discipline}>{discipline}</S.Item>)
-          )}
-        </S.List>
-      </div>
-    </S.DivContainer>
+      <S.EditorDiv>
+        <CreateDiscipline title={title} setTitle={setTitle} desc={desc} setDesc={setDesc} />
+        <DeleteDiscipline
+          deleteId={deleteId}
+          disciplinesNames={disciplinesNames}
+          setConfirmDeleteModal={setConfirmDeleteModal}
+          setDeleteId={setDeleteId}
+        />
+      </S.EditorDiv>
+    </>
   );
 }

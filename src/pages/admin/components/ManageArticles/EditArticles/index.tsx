@@ -5,9 +5,10 @@ import useArticle from "../../../../../hooks/useArticle";
 import useFetchArticles from "../../../../../hooks/useFetchArticles";
 import { Spinner } from "react-bootstrap";
 import * as S from "../components/sharedStyles";
+import { DisciplineNameAndId } from "../../../../../types/globalTypes";
 
 interface EditArticlesProps {
-  disciplinesNames: string[];
+  disciplinesNames: DisciplineNameAndId[];
 }
 
 export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
@@ -37,12 +38,14 @@ export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
     try {
       if (selectedArticleData) {
         const modifedArticle = {
-          title: newTitle || selectedArticleData.title,
+          title: newTitle.toLowerCase() || selectedArticleData.title.toLowerCase(),
           author: newAuthor || selectedArticleData.author,
           content: newContent,
           id: selectedArticleData.id,
         };
-        await updateArticle(selectedDiscipline, modifedArticle);
+        const res = await updateArticle(selectedDiscipline, modifedArticle);
+        alert(res);
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -106,7 +109,9 @@ export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
         defaultValue={selectedArticleData?.content ?? ""}
       />
       <S.ButtonContainer>
-        <S.Button onClick={(e) => handleClick(e)}>{isLoading ? <Spinner /> : "Salvar Alterações"}</S.Button>
+        <S.Button disabled={!newAuthor || !newTitle} onClick={(e) => handleClick(e)}>
+          {isLoading ? <Spinner /> : "Salvar Alterações"}
+        </S.Button>
       </S.ButtonContainer>
     </S.Form>
   );

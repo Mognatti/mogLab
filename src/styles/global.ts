@@ -10,9 +10,14 @@ html{
 }
 
 body{
-    background-color: ${(props) =>
-      props.theme.title == "dark" ? props.theme.colors.black[400] : props.theme.colors.white[200]};
-    color: ${(props) => props.theme.colors.black[900]};
+  background-color: ${(props) =>
+    props.theme.title == "dark" ? props.theme.colors.black[400] : props.theme.colors.white[200]};
+  color: ${(props) => props.theme.colors.black[900]};
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
 }
 
 ul, ol{
@@ -94,12 +99,11 @@ export const GlobalButton = styled.button`
 export const GlobalInput = styled.input`
   border: none;
   border-radius: 8px;
-  outline: 1px solid ${(props) => props.theme.colors.yellow[500]};
   background: transparent;
   color: ${(props) => (props.theme.title === "dark" ? props.theme.colors.white[500] : props.theme.colors.black[500])};
   padding: 8px;
-  box-shadow: 3px 3px 5px
-    ${(props) => (props.theme.title === "dark" ? props.theme.colors.yellow[300] : "rgba(0, 0, 0, 0.8)")};
+  box-shadow: 0px 0px 5px
+    ${(props) => (props.theme.title === "dark" ? props.theme.colors.yellow[500] : "rgba(0, 0, 0, 0.8)")};
   transition: 350ms;
 
   &:focus {

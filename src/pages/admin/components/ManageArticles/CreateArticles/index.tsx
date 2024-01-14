@@ -4,9 +4,10 @@ import useArticle from "../../../../../hooks/useArticle";
 import { Spinner } from "react-bootstrap";
 import TextEditor from "../components/TextEditor";
 import DisciplineSelector from "../components/DisciplineSelector";
+import { DisciplineNameAndId } from "../../../../../types/globalTypes";
 
 interface CreateArticlesProps {
-  disciplinesNames: string[];
+  disciplinesNames: DisciplineNameAndId[];
 }
 
 type handleSubmitProps = {
@@ -27,7 +28,7 @@ export default function CreateArticles({ disciplinesNames }: Readonly<CreateArti
     {
       id: "article-title",
       type: "text",
-      placeholder: "Introdução à Disciplina...",
+      placeholder: "Título do Artigo...",
       value: articleTitle,
       setter: setArticleTitle,
       label: <label htmlFor="article-title">Título do artigo</label>,
@@ -35,7 +36,7 @@ export default function CreateArticles({ disciplinesNames }: Readonly<CreateArti
     {
       id: "article-author",
       type: "text",
-      placeholder: "Fulano de tal...",
+      placeholder: "Autor do artigo...",
       value: articleAuthor,
       setter: setArticleAuthor,
       label: <label htmlFor="article-author">Autor do artigo</label>,
@@ -45,7 +46,7 @@ export default function CreateArticles({ disciplinesNames }: Readonly<CreateArti
   async function handleSubmit({ e, title, content, author }: handleSubmitProps) {
     e.preventDefault();
     const article = {
-      title: title,
+      title: title.toLowerCase(),
       content: content,
       author: author,
     };
