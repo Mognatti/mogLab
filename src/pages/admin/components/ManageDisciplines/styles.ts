@@ -37,8 +37,21 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
   gap: 3vh 0;
-  height: 350px;
+  height: 380px;
+  * {
+    width: 67%;
+  }
+  p {
+    text-align: justify;
+  }
+  h3,
+  h4,
+  h5 {
+    text-align: center;
+    margin: 0;
+  }
 `;
 
 export const Input = styled(GlobalInput)`
@@ -64,7 +77,7 @@ export const TextArea = styled.textarea`
 
 export const Select = styled.select`
   border: none;
-  width: 301px;
+  width: 67%;
   border-radius: 8px;
   outline: 1px solid ${(props) => props.theme.colors.yellow[500]};
   background: transparent;

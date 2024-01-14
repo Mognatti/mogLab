@@ -26,6 +26,12 @@ export default function DeleteDiscipline({
           </option>
         ))}
       </S.Select>
+      <h5>Importante!</h5>
+      <p>
+        Ao deletar uma disciplina Ao deletar uma disciplina todos os artigos associados a ela serão deletados. Garanta
+        de fazer isso somente depois de jogar os artigos para uma outra disciplina e faça a deleção somente quando for
+        absolutamente necessário!
+      </p>
       <S.Button
         disabled={!deleteId}
         onClick={() => (deleteId ? setConfirmDeleteModal(true) : alert("Selecione uma disciplina para excluir"))}
