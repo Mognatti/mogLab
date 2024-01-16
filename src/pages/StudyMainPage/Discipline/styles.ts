@@ -4,12 +4,10 @@ import Tilt from "react-parallax-tilt";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   margin: 5svh 4svw 0svh 4svw;
-  min-height: 67svh;
-  h3 {
-    margin-top: -15svh;
-    margin-bottom: 5svh;
+  min-height: 64.7svh;
+  @media (max-width: 750px) {
+    margin: 0svh 4svw;
   }
 `;
 
@@ -20,6 +18,7 @@ export const Warning = styled.p`
   height: 65svh;
   font-weight: 500;
   font-size: 1.5em;
+  text-align: center;
 `;
 
 export const List = styled.ul`
@@ -27,13 +26,14 @@ export const List = styled.ul`
   flex-wrap: wrap;
   list-style: none;
   align-items: center;
-  gap: 2svw;
+  gap: 5svh 2svw;
   margin: 2svh 2svw 2svh 2svw;
   justify-content: center;
 `;
 
 export const TiltDiv = styled(Tilt)`
-  width: 28%;
+  min-width: 340px;
+  max-width: 340px;
 `;
 
 export const Card = styled.li`
@@ -42,7 +42,9 @@ export const Card = styled.li`
   height: 275px;
   text-align: justify;
   padding: 16px;
-  box-shadow: 0px 0px 3px ${(props) => props.theme.colors.yellow[500]};
+  outline: 1px solid
+    ${(props) => (props.theme.title === "dark" ? props.theme.colors.yellow[500] : props.theme.colors.blue[500])};
+
   &:hover {
     cursor: pointer;
   }
@@ -50,7 +52,7 @@ export const Card = styled.li`
     font-size: 1.3em;
   }
   hr {
-    color: ${(props) => props.theme.colors.yellow[500]};
+    color: ${(props) => (props.theme.title === "dark" ? props.theme.colors.yellow[500] : props.theme.colors.blue[500])};
   }
 `;
 
@@ -58,8 +60,8 @@ export const AuthorContainer = styled.div`
   position: absolute;
   display: flex;
   width: 100%;
-  right: 1svw;
-  bottom: 1svw;
+  right: 4svw;
+  bottom: 4svw;
   align-items: flex-end;
   justify-content: flex-end;
 `;

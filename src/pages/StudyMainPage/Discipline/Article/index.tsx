@@ -31,6 +31,7 @@ const ArrowUpDiv = styled.div`
   border-radius: 50%;
   padding: 8px;
   transition: 350ms;
+
   &:hover {
     transform: scale(1.1);
   }

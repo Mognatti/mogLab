@@ -1,23 +1,22 @@
 import { styled } from "styled-components";
 
 export const MainContainer = styled.div`
-  margin-top: 8vh;
-  margin-left: 4vw;
-  margin-right: 4vw;
+  margin-top: 8svh;
+  margin-left: 4svw;
+  margin-right: 4svw;
   height: 92svh;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid;
-`;
-
-export const Container = styled.div`
-  margin-left: 4vw;
-  margin-right: 4vw;
-  height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  @media (max-width: 1030px) {
+    justify-content: center;
+    text-align: center;
+    div {
+      margin-bottom: -20svh;
+    }
+  }
 `;
 
 export const HomeTitle = styled.h1`
@@ -33,10 +32,29 @@ export const HomeImage = styled.img`
   width: 500px;
 `;
 
+export const Container = styled.div`
+  margin-left: 4svw;
+  margin-right: 4svw;
+  min-height: 90svh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  @media (max-width: 1030px) {
+    justify-content: center;
+    text-align: center;
+    div {
+      margin-bottom: -10svh;
+    }
+  }
+`;
 export const TextSpace = styled.div`
   display: flex;
   flex-direction: column;
   width: 35%;
+  @media (max-width: 1030px) {
+    width: 100%;
+  }
 `;
 
 export const Content = styled.p`

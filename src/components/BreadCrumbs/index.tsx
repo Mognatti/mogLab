@@ -13,9 +13,10 @@ const Container = styled.div<{ size: number }>`
   height: 4svh;
   gap: 0.5em;
   width: fit-content;
+  flex-wrap: wrap;
 `;
 
-const CrumbContent = styled.span`
+const CrumbContent = styled.div`
   display: flex;
   gap: 0.5em;
   align-items: center;
@@ -27,6 +28,10 @@ const CrumbLink = styled(StyledLink)`
     align-items: center;
     justify-content: center;
     gap: 0.5em;
+    font-size: 1em;
+    @media (max-width: 750px) {
+      font-size: 0.8em;
+    }
   }
 `;
 

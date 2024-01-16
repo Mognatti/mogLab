@@ -13,8 +13,8 @@ export default function Home() {
       <S.Container>
         <S.TextSpace>
           <S.Content>
-            Nossos artigos são produzidos de maneira didátiaca para que você
-            possa receber um conteúdo completo e de fácil compreensão
+            Nossos artigos são produzidos de maneira didátiaca para que você possa receber um conteúdo completo e de
+            fácil compreensão
           </S.Content>
         </S.TextSpace>
         <S.HomeImage src="/img/study_pic_2.png" alt="study_group" />

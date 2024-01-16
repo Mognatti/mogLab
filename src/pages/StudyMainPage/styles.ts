@@ -1,9 +1,9 @@
 import { styled } from "styled-components";
+import { SiBookstack } from "react-icons/si";
 
 export const MainContainer = styled.div`
-  margin-top: 3svh;
-  margin-left: 4svw;
-  margin-right: 4svw;
+  margin: 3svh 4svw;
+  margin-bottom: 0;
   display: flex;
   flex-direction: column;
 `;
@@ -18,12 +18,19 @@ export const List = styled.ul`
   align-content: center;
   gap: 1svh 0;
   margin: 2svh 4svw;
+  @media (max-width: 750px) {
+    margin: 0 2svw;
+  }
 `;
 
 export const Item = styled.li`
   width: 100%;
   display: flex;
   align-items: center;
+`;
+
+export const DisciplineIcon = styled(SiBookstack)`
+  color: ${(props) => (props.theme.title === "dark" ? props.theme.colors.white[500] : props.theme.colors.yellow[500])};
 `;
 
 export const Paragraph = styled.p`

@@ -2,13 +2,10 @@ import { styled } from "styled-components";
 
 export const FooterContainer = styled.footer`
   display: flex;
-  flex-shrink: 0; /* Impede que o footer encolha quando o conteúdo cresce */
   align-items: center;
-  width: 100%;
   height: 15vh;
   background-color: ${(props) => props.theme.colors.blue[500]};
   color: ${(props) => props.theme.colors.white[500]};
-  flex: 1; /* Faz com que este conteúdo ocupe o espaço disponível */
 `;
 
 export const Content = styled.div`
@@ -18,7 +15,11 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   width: 100%;
+  p {
+    width: 80%;
+  }
 `;
 
 export const Nav = styled.nav`

@@ -6,8 +6,6 @@ export const ThemeDiv = styled.div`
   display: flex;
   align-items: center;
   gap: 30px;
-  position: absolute;
-  right: 5vw;
 `;
 
 export const ThemeSwitch = styled(Form.Switch)`
@@ -27,7 +25,7 @@ export const IconRotationDiv = styled.div<{ clicked?: boolean }>`
 `;
 
 export const SunIcon = styled(FaSun)<{ show: string }>`
-  color: ${(props) => props.theme.colors.green[700]};
+  color: ${(props) => props.theme.colors.yellow[500]};
   opacity: ${(props) => (props.show === "light" ? 1 : 0)};
   transition: 350ms;
 `;

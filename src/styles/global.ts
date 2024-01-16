@@ -14,10 +14,8 @@ body{
     props.theme.title == "dark" ? props.theme.colors.black[400] : props.theme.colors.white[200]};
   color: ${(props) => props.theme.colors.black[900]};
   margin: 0;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-
 }
 
 ul, ol{
@@ -34,6 +32,11 @@ a{
       opacity: 0.6;
     }
    }
+
+ img{
+  display: block;
+  max-width: 100%;
+ }
 /* TinyMCE */
   .tox .tox-statusbar__branding svg{
     display: none;

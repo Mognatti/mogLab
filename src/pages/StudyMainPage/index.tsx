@@ -4,7 +4,6 @@ import BiologyRoute from "./components/BiologyRoute";
 import useFetchDisciplinesNames from "../../hooks/useFetchDisciplinesNames";
 import Loader from "../Loader";
 import capitalizeWords from "../../functions/capitalizeWords";
-import { SiBookstack } from "react-icons/si";
 
 export default function StudyMainPage() {
   const [{ disciplinesNames, isDisciplinesNamesLoading }] = useFetchDisciplinesNames();
@@ -23,7 +22,7 @@ export default function StudyMainPage() {
           <S.Item key={discipline.id}>
             <GS.StyledLink to={"/disciplinas/" + discipline.title.toLowerCase()}>
               <S.LinkContainer>
-                <SiBookstack />
+                <S.DisciplineIcon />
                 {capitalizeWords(discipline.title)}
               </S.LinkContainer>
             </GS.StyledLink>
