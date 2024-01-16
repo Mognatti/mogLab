@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GlobalButton } from "../../styles/global";
+import { GlobalButton, GlobalInput, GlobalTextArea } from "../../styles/global";
 
 export const Container = styled.div`
   display: flex;
@@ -7,7 +7,10 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 3vh;
-  height: 100vh;
+  height: 83svh;
+  h3 {
+    margin-top: -5svh;
+  }
 `;
 
 export const Form = styled.form`
@@ -19,15 +22,11 @@ export const Form = styled.form`
   gap: 3vh;
 `;
 
-export const Input = styled.input<{ message: boolean }>`
+export const Input = styled(GlobalInput)`
   width: 30%;
-  padding: 8px;
-  border: ${(props) => (props.message ? "1px solid" : "none")};
-  border-bottom: ${(props) => (props.message ? "" : "1px solid")};
-  height: ${(props) => (props.message ? "150px" : "auto")};
 `;
 
-export const TextArea = styled.textarea`
+export const TextArea = styled(GlobalTextArea)`
   resize: none;
   width: 30%;
   height: 15vh;

@@ -18,12 +18,12 @@ export default function ManageArticles() {
   return (
     <S.Container>
       <S.FieldSet>
-        <S.Button id="create-article" onClick={() => setCreateArticle(true)}>
+        <S.NavLink id="create-article" onClick={() => setCreateArticle(true)}>
           Criar artigo
-        </S.Button>
-        <S.Button id="edit-article" onClick={() => setCreateArticle(false)}>
+        </S.NavLink>
+        <S.NavLink id="edit-article" onClick={() => setCreateArticle(false)}>
           Editar artigo
-        </S.Button>
+        </S.NavLink>
       </S.FieldSet>
       {createArticle ? <CreateArticles {...{ disciplinesNames }} /> : <EditArticles {...{ disciplinesNames }} />}
     </S.Container>

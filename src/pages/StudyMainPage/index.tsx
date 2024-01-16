@@ -2,7 +2,7 @@ import * as S from "./styles";
 import * as GS from "../../styles/global";
 import BiologyRoute from "./components/BiologyRoute";
 import useFetchDisciplinesNames from "../../hooks/useFetchDisciplinesNames";
-import Loader from "./Discipline/Loader";
+import Loader from "../Loader";
 import capitalizeWords from "../../functions/capitalizeWords";
 import { SiBookstack } from "react-icons/si";
 
@@ -11,7 +11,6 @@ export default function StudyMainPage() {
   const sortedDisciplines = [...disciplinesNames].sort((a, b) => {
     return a < b ? -1 : a > b ? 1 : 0;
   });
-
   if (isDisciplinesNamesLoading) {
     return <Loader />;
   }

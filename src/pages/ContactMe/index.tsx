@@ -75,7 +75,6 @@ export default function ContactMe() {
       <S.Form onSubmit={(e) => handleSubmit(e)}>
         {inputData.map((input) => (
           <S.Input
-            message={input.name === "message"}
             required
             key={input.id}
             type={input.type}

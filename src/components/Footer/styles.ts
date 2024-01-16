@@ -20,3 +20,12 @@ export const Content = styled.div`
   justify-content: center;
   width: 100%;
 `;
+
+export const Nav = styled.nav`
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  a {
+    color: ${(props) => props.theme.colors.white[500]};
+  }
+`;

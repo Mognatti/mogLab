@@ -20,7 +20,7 @@ export const InputContainer = styled.div`
   gap: 1svh;
 `;
 
-export const Button = styled.a`
+export const NavLink = styled.a`
   display: flex;
   flex-direction: column;
   position: relative;

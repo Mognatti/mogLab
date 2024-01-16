@@ -36,10 +36,10 @@ export default function TextEditor({ textValue, setTextValue, defaultValue }: Re
           "accordion",
           "emoticons",
           "importcss",
+          "textcolor",
         ],
         toolbar:
-          "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-
+          "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat | forecolor backcolor",
         spellchecker_language: "pt_BR",
       }}
     />

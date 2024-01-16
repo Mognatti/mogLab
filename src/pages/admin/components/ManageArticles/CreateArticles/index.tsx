@@ -92,7 +92,7 @@ export default function CreateArticles({ disciplinesNames }: Readonly<CreateArti
             })
           }
         >
-          {isLoading ? <Spinner /> : "Enviar"}
+          {isLoading ? <Spinner /> : "Salvar Artigo"}
         </S.Button>
       </S.ButtonContainer>
       {responseMessage && <span style={{ textAlign: "center" }}>{responseMessage}</span>}

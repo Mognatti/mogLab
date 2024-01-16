@@ -1,6 +1,6 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useFetchDisciplines from "../../../hooks/useFetchDisciplines";
-import Loader from "./Loader";
+import Loader from "../../Loader";
 import NotFound from "../../NotFound";
 import { ArticleProps } from "../../../types/globalTypes";
 import * as S from "./styles";

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Loader from "../../../StudyMainPage/Discipline/Loader";
+import Loader from "../../../Loader";
 import { User } from "firebase/auth";
 
 interface AuthRedirectControlProps {

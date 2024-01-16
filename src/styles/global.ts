@@ -34,11 +34,12 @@ a{
       opacity: 0.6;
     }
    }
-/* Removes TinyMCE icon from the text editor */
+/* TinyMCE */
   .tox .tox-statusbar__branding svg{
     display: none;
   }
 
+  
 /* Scroll bar styles */
 ::-webkit-scrollbar-thumb{
     background: ${(props) =>
@@ -89,6 +90,7 @@ export const GlobalButton = styled.button`
   }
   &:disabled {
     opacity: ${(props) => (props.theme.title == "dark" ? "0.5" : "0.7")};
+    outline: 1px solid red;
     &:hover {
       background-color: transparent;
       cursor: not-allowed;
@@ -102,18 +104,74 @@ export const GlobalInput = styled.input`
   background: transparent;
   color: ${(props) => (props.theme.title === "dark" ? props.theme.colors.white[500] : props.theme.colors.black[500])};
   padding: 8px;
-  box-shadow: 0px 0px 5px
-    ${(props) => (props.theme.title === "dark" ? props.theme.colors.yellow[500] : "rgba(0, 0, 0, 0.8)")};
+  box-shadow: ${(props) => (props.theme.title === "dark" ? ` 0 0 5px ${props.theme.colors.yellow[300]}` : "none")};
   transition: 350ms;
-
+  outline: 1px solid ${(props) => props.theme.colors.yellow[500]};
   &:focus {
     transform: scale(1.05);
-    box-shadow: 0px 0px 10px
-      ${(props) => (props.theme.title === "dark" ? props.theme.colors.yellow[300] : "rgba(0, 0, 0, 0.8)")};
+    box-shadow: 0px 0px 10px ${(props) => (props.theme.title === "dark" ? props.theme.colors.yellow[300] : "none")};
+  }
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    outline: 1px solid red;
+  }
+`;
+export const GlobalTextArea = styled.textarea`
+  width: 30svw;
+  height: 20svh;
+  background-color: transparent;
+  box-shadow: ${(props) => (props.theme.title === "dark" ? ` 0 0 5px ${props.theme.colors.yellow[300]}` : "none")};
+  outline: 1px solid ${(props) => props.theme.colors.yellow[500]};
+  border: none;
+  color: ${(props) => (props.theme.title === "dark" ? props.theme.colors.white[500] : props.theme.colors.black[500])};
+  resize: none;
+  transition: 350ms;
+  padding: 8px;
+  border-radius: 8px;
+  &:focus {
+    transform: scale(1.02);
+  }
+`;
+
+export const GlobalSelect = styled.select`
+  border: none;
+  width: 67%;
+  border-radius: 8px;
+  outline: 1px solid ${(props) => props.theme.colors.yellow[500]};
+  background: transparent;
+  color: ${(props) => (props.theme.title === "dark" ? props.theme.colors.white[500] : props.theme.colors.black[500])};
+  padding: 8px 15px;
+  box-shadow: ${(props) => (props.theme.title === "dark" ? ` 0 0 5px ${props.theme.colors.yellow[300]}` : "none")};
+  transition: 350ms;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, ${(props) => props.theme.colors.blue[500]} 50%),
+    linear-gradient(135deg, ${(props) => props.theme.colors.blue[500]} 50%, transparent 60%),
+    radial-gradient(${(props) => props.theme.colors.yellow[500]} 60%, transparent 70%);
+  background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 0.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+  background-repeat: no-repeat;
+  &:focus {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 10px ${(props) => (props.theme.title === "dark" ? props.theme.colors.yellow[300] : "none")};
+    background-image: linear-gradient(45deg, ${(props) => props.theme.colors.yellow[500]} 50%, transparent 50%),
+      linear-gradient(135deg, transparent 50%, ${(props) => props.theme.colors.yellow[500]} 50%),
+      radial-gradient(${(props) => props.theme.colors.blue[500]} 70%, transparent 72%);
+    background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em, calc(100% - 0.5em) 0.5em;
+    background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+    background-repeat: no-repeat;
+    border-color: green;
   }
   &:disabled {
     opacity: 0.7;
     box-shadow: 0px 0px 15px rgb(255, 0, 0);
     cursor: not-allowed;
+  }
+
+  option {
+    background-color: ${(props) =>
+      props.theme.title === "dark" ? props.theme.colors.blue[400] : props.theme.colors.yellow[500]};
   }
 `;

@@ -19,7 +19,6 @@ export default function ManageDisciplines() {
   const [desc, setDesc] = useState<string>("");
   const [deleteId, setDeleteId] = useState("");
   const { user } = useContext(CurrentUser);
-
   async function handleDeleteDiscipline(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
     await deleteDiscipline(deleteId);
