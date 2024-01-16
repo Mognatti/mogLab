@@ -10,7 +10,7 @@ export const Container = styled.div`
     grid-template-columns: 1fr 1fr;
   }
   @media (max-width: 650px) {
-    grid-template-columns: 1fr 0fr;
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -49,6 +49,9 @@ export const ContentContainer = styled.div`
   align-items: center;
   justify-content: center;
   background: ${(props) => props.theme.colors.yellow[400]};
+  @media (max-width: 650px) {
+    display: none;
+  }
 `;
 
 export const AuthImage = styled.img`
