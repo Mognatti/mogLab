@@ -19,7 +19,9 @@ export default function useFetchDisciplines() {
         setIsDisciplinesLoading(false);
       }
     }
-    fetchDisciplines();
+    if (disciplines.length <= 0) {
+      fetchDisciplines();
+    }
   }, [disciplinesURL]);
 
   async function deleteDiscipline(id: string) {

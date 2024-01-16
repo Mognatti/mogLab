@@ -23,7 +23,9 @@ export default function useFetchDisciplinesNames() {
         setIsDisciplinesNamesLoading(false);
       }
     }
-    fetchDisciplinesNames();
+    if (disciplinesNames.length <= 0) {
+      fetchDisciplinesNames();
+    }
   }, [disciplinesNamesURL]);
 
   return [{ disciplinesNames, isDisciplinesNamesLoading }];
