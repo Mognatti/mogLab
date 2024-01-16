@@ -7,6 +7,7 @@ import { Spinner } from "react-bootstrap";
 import * as S from "../components/sharedStyles";
 import { DisciplineNameAndId } from "../../../../../types/globalTypes";
 import ArticleSelector from "../components/ArticleSelector";
+import capitalizeWords from "../../../../../functions/capitalizeWords";
 
 interface EditArticlesProps {
   disciplinesNames: DisciplineNameAndId[];
@@ -21,13 +22,18 @@ export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
   const [newContent, setNewContent] = useState(selectedArticleData?.content ?? "");
   const [newTitle, setNewTitle] = useState(selectedArticleData?.title ?? "");
   const [newAuthor, setNewAuthor] = useState(selectedArticleData?.author ?? "");
+  const [isChangingName, setIsChangingName] = useState(false);
+  const [isChangingAuthor, setIsChangingAuthor] = useState(false);
+
   useEffect(() => {
-    async function updateDom() {
+    async function updateArticles() {
       if (selectedDiscipline) {
         await fetchArticles(selectedDiscipline);
+        setIsChangingAuthor(false);
+        setIsChangingName(false);
       }
     }
-    updateDom();
+    updateArticles();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDiscipline]);
@@ -53,20 +59,34 @@ export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
     }
   }
 
+  function updateValue(
+    e: React.ChangeEvent<HTMLInputElement>,
+    setter: React.Dispatch<React.SetStateAction<string>>,
+    id: string
+  ) {
+    if (id === "new-title") {
+      setIsChangingName(true);
+    } else {
+      setIsChangingAuthor(true);
+    }
+    setter(e.target.value);
+  }
   const inputs = [
     {
       id: "new-title",
-      value: newTitle,
+      value: isChangingName ? newTitle : selectedArticleData && capitalizeWords(selectedArticleData.title),
       setter: setNewTitle,
-      placeholder: selectedArticleData?.title,
-      label: <label htmlFor="new-title">Novo Título do Artigo</label>,
+      placeholder: selectedArticleData && capitalizeWords(selectedArticleData.title),
+      // stopped using label for better UX
+      label: <span>Novo Título do Artigo</span>,
     },
     {
       id: "new-author",
-      value: newAuthor,
+      value: isChangingAuthor ? newAuthor : selectedArticleData?.author,
       setter: setNewAuthor,
       placeholder: selectedArticleData?.author,
-      label: <label htmlFor="new-author">Alterar Autor do Artigo</label>,
+      // stopped using label for better UX
+      label: <span>Alterar Autor do Artigo</span>,
     },
   ];
 
@@ -82,7 +102,7 @@ export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
             <S.Input
               id={item.id}
               value={item.value}
-              onChange={(e) => item.setter(e.target.value)}
+              onChange={(e) => updateValue(e, item.setter, item.id)}
               placeholder={item.placeholder}
               disabled={!selectedArticle}
             />

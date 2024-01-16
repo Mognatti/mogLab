@@ -28,7 +28,7 @@ export default function CreateArticles({ disciplinesNames }: Readonly<CreateArti
     {
       id: "article-title",
       type: "text",
-      placeholder: "Título do Artigo...",
+      placeholder: "Título do Artigo (min 3 caracteres)",
       value: articleTitle,
       setter: setArticleTitle,
       label: <label htmlFor="article-title">Título do artigo</label>,
@@ -36,7 +36,7 @@ export default function CreateArticles({ disciplinesNames }: Readonly<CreateArti
     {
       id: "article-author",
       type: "text",
-      placeholder: "Autor do artigo...",
+      placeholder: "Autor do artigo (min 3 caracteres)",
       value: articleAuthor,
       setter: setArticleAuthor,
       label: <label htmlFor="article-author">Autor do artigo</label>,
@@ -45,6 +45,9 @@ export default function CreateArticles({ disciplinesNames }: Readonly<CreateArti
 
   async function handleSubmit({ e, title, content, author }: handleSubmitProps) {
     e.preventDefault();
+    if (title.length <= 3 || content.length <= 150 || author.length <= 3) {
+      return alert("Todos os dados devem estar preenchidos!");
+    }
     const article = {
       title: title.toLowerCase(),
       content: content,
@@ -81,9 +84,10 @@ export default function CreateArticles({ disciplinesNames }: Readonly<CreateArti
           </S.InputAndLabelDiv>
         ))}
       </S.InputAndLabelContainer>
-      <TextEditor {...{ textValue, setTextValue }} />
+      <TextEditor {...{ textValue, setTextValue }} defaultValue="min 150 caracteres" />
       <S.ButtonContainer>
         <S.Button
+          disabled={articleTitle.length <= 3 || textValue.length <= 150 || articleAuthor.length <= 3}
           type="submit"
           onClick={(e) =>
             handleSubmit({

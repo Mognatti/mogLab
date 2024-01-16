@@ -90,9 +90,9 @@ export const GlobalButton = styled.button`
   }
   &:disabled {
     opacity: ${(props) => (props.theme.title == "dark" ? "0.5" : "0.7")};
-    outline: 1px solid red;
+    background-color: ${(props) => (props.theme.title == "dark" ? "rgba(266, 266, 266, 0.1)" : "rgba(0, 0, 0, 0.1)")};
+    outline: none;
     &:hover {
-      background-color: transparent;
       cursor: not-allowed;
     }
   }
@@ -114,7 +114,9 @@ export const GlobalInput = styled.input`
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;
-    outline: 1px solid red;
+    background-color: ${(props) => (props.theme.title == "dark" ? "rgba(266, 266, 266, 0.1)" : "rgba(0, 0, 0, 0.1)")};
+    outline: none;
+    box-shadow: none;
   }
 `;
 export const GlobalTextArea = styled.textarea`
