@@ -36,6 +36,9 @@ export const Form = styled.form`
   span {
     text-align: center;
   }
+  @media (max-width: 650px) {
+    border: none;
+  }
 `;
 
 export const Input = styled(GlobalInput)`
