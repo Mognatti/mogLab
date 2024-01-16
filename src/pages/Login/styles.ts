@@ -4,7 +4,8 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 30% 70%;
-  height: 100svh;
+  height: 85svh;
+  margin-top: -2svh;
 `;
 
 export const FormContainer = styled.div``;
