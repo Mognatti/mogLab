@@ -33,9 +33,9 @@ const CrumbLink = styled(StyledLink)`
 export default function BreadCrumbs() {
   const location = useLocation();
   let currentlink = "";
-  const filteredCrumbs = location.pathname.split("/").filter((crumb) => crumb !== "");
+  const filteredCrumbs = location.pathname.split("/").filter((crumb: string) => crumb !== "");
 
-  const crumbs = filteredCrumbs.map((crumb, index, array) => {
+  const crumbs = filteredCrumbs.map((crumb: string, index: number, array: string[]) => {
     const decodedCrumb = decodeURIComponent(crumb);
     currentlink += `/${decodedCrumb}`;
     const homeIcon = index === 0 ? <IoIosHome size="15px" /> : null;
