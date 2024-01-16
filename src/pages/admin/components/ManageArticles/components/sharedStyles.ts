@@ -6,18 +6,24 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 2svh;
-
   select {
     padding: 8px;
     width: 100%;
+  }
+  @media (max-width: 930px) {
+    width: 70svw;
   }
 `;
 
 export const InputAndLabelContainer = styled.div`
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr;
   width: 100%;
   gap: 2svw;
+  @media (max-width: 540px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const InputAndLabelDiv = styled.div`
@@ -28,6 +34,9 @@ export const InputAndLabelDiv = styled.div`
 
 export const Input = styled(GlobalInput)`
   width: 95%;
+  @media (max-width: 540px) {
+    width: 100%;
+  }
 `;
 
 export const ButtonContainer = styled.div`

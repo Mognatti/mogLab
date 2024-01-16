@@ -22,7 +22,7 @@ export default function CreateArticles({ disciplinesNames }: Readonly<CreateArti
   const [articleAuthor, setArticleAuthor] = useState<string>("");
   const [textValue, setTextValue] = useState<string>("<p></p>");
   const [selectedDiscipline, setSelectedDiscipline] = useState<string>("");
-  const [{ isLoading, postNewArticle, responseMessage }] = useArticle();
+  const [{ isLoading, postNewArticle }] = useArticle();
 
   const inputs = [
     {
@@ -51,10 +51,12 @@ export default function CreateArticles({ disciplinesNames }: Readonly<CreateArti
       author: author,
     };
     try {
-      await postNewArticle(selectedDiscipline, article);
+      const res = await postNewArticle(selectedDiscipline, article);
       setArticleAuthor("");
       setTextValue("<p></p>");
       setArticleTitle("");
+      alert(res);
+      window.location.reload();
     } catch (error) {
       console.log(error);
       alert("algo deu errado");
@@ -95,7 +97,6 @@ export default function CreateArticles({ disciplinesNames }: Readonly<CreateArti
           {isLoading ? <Spinner /> : "Salvar Artigo"}
         </S.Button>
       </S.ButtonContainer>
-      {responseMessage && <span style={{ textAlign: "center" }}>{responseMessage}</span>}
     </S.Form>
   );
 }

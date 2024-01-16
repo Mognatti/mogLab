@@ -22,7 +22,9 @@ export const ModalContent = styled.div<{ display: boolean }>`
   top: 17%;
   left: ${(props) => (props.display ? "30%" : "150%")};
   width: 45svw;
+  min-width: 350px;
   height: 45svh;
+  min-height: 400px;
   background: ${(props) => props.theme.colors.blue[400]};
   border-radius: 16px;
   display: flex;
@@ -32,9 +34,11 @@ export const ModalContent = styled.div<{ display: boolean }>`
   transition: 350ms ease-in;
   padding: 16px;
   box-shadow: 5px 5px 15px ${(props) => props.theme.colors.black[400]};
+  text-align: center;
 
-  h3 {
-    margin-top: 4svh;
+  @media (max-width: 800px) {
+    left: ${(props) => (props.display ? "2.5svw" : "150%")};
+    width: 95svw;
   }
 `;
 

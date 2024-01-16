@@ -3,12 +3,16 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 30% 70%;
-  height: 85svh;
+  grid-template-columns: 1fr 2fr;
+  min-height: 85svh;
   margin-top: -2svh;
+  @media (max-width: 972px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 650px) {
+    grid-template-columns: 1fr 0fr;
+  }
 `;
-
-export const FormContainer = styled.div``;
 
 export const Form = styled.form`
   display: flex;
@@ -20,14 +24,17 @@ export const Form = styled.form`
   height: 100%;
   border-right: 1px solid;
   label {
-    margin-left: -50%;
     text-align: left;
+    width: 80%;
   }
   hr {
     width: 80%;
     margin: 0;
     margin-bottom: 2svh;
     color: ${(props) => props.theme.colors.yellow[500]};
+  }
+  span {
+    text-align: center;
   }
 `;
 

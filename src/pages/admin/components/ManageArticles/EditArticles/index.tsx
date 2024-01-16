@@ -6,6 +6,7 @@ import useFetchArticles from "../../../../../hooks/useFetchArticles";
 import { Spinner } from "react-bootstrap";
 import * as S from "../components/sharedStyles";
 import { DisciplineNameAndId } from "../../../../../types/globalTypes";
+import ArticleSelector from "../components/ArticleSelector";
 
 interface EditArticlesProps {
   disciplinesNames: DisciplineNameAndId[];
@@ -20,7 +21,6 @@ export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
   const [newContent, setNewContent] = useState(selectedArticleData?.content ?? "");
   const [newTitle, setNewTitle] = useState(selectedArticleData?.title ?? "");
   const [newAuthor, setNewAuthor] = useState(selectedArticleData?.author ?? "");
-
   useEffect(() => {
     async function updateDom() {
       if (selectedDiscipline) {
@@ -28,12 +28,13 @@ export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
       }
     }
     updateDom();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDiscipline]);
 
   useEffect(() => {}, [articleList]);
 
-  async function handleClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  async function saveData(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
     try {
       if (selectedArticleData) {
@@ -73,22 +74,7 @@ export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
     <S.Form>
       <h3>Editor de Artigos</h3>
       <DisciplineSelector {...{ disciplinesNames, selectedDiscipline, setSelectedDiscipline }} />
-      {isArticlesListLoading ? (
-        <Spinner />
-      ) : (
-        <select
-          onChange={(e) => setSelectedArticle(e.target.value)}
-          value={selectedArticle}
-          disabled={!selectedDiscipline}
-        >
-          <option value="">Selecione um artigo</option>
-          {articleList.map((article) => (
-            <option key={article.id} value={article.id}>
-              {article.title}
-            </option>
-          ))}
-        </select>
-      )}
+      <ArticleSelector {...{ articleList, isArticlesListLoading, selectedArticle, setSelectedArticle }} />
       <S.InputAndLabelContainer>
         {inputs.map((item) => (
           <S.InputAndLabelDiv key={item.id}>
@@ -109,7 +95,7 @@ export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
         defaultValue={selectedArticleData?.content ?? ""}
       />
       <S.ButtonContainer>
-        <S.Button disabled={!newAuthor || !newTitle} onClick={(e) => handleClick(e)}>
+        <S.Button disabled={!newAuthor || !newTitle} onClick={(e) => saveData(e)}>
           {isLoading ? <Spinner /> : "Salvar Alterações"}
         </S.Button>
       </S.ButtonContainer>

@@ -18,7 +18,7 @@ export const Content = styled.div`
   text-align: center;
   width: 100%;
   p {
-    width: 80%;
+    width: 65%;
   }
 `;
 

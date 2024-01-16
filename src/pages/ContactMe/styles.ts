@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 3vh;
-  height: 83svh;
+  min-height: 83svh;
   h3 {
     margin-top: -5svh;
   }
@@ -23,25 +23,45 @@ export const Form = styled.form`
 `;
 
 export const Input = styled(GlobalInput)`
-  width: 30%;
+  min-width: 30%;
+  @media (max-width: 880px) {
+    min-width: 60%;
+  }
+  @media (max-width: 485px) {
+    min-width: 300px;
+  }
 `;
 
 export const TextArea = styled(GlobalTextArea)`
   resize: none;
   width: 30%;
   height: 15vh;
+  @media (max-width: 880px) {
+    min-width: 60%;
+  }
+  @media (max-width: 485px) {
+    min-width: 300px;
+  }
 `;
 
 export const BookImage = styled.img`
-  width: 28vw;
+  width: 28svw;
+  min-width: 290px;
   position: absolute;
-  left: 2vw;
+  left: 2svw;
+  @media (max-width: 880px) {
+    display: none;
+  }
 `;
 
 export const ScientisImg = styled.img`
   width: 31vw;
+  min-width: 320px;
   position: absolute;
   right: 2vw;
+  @media (max-width: 880px) {
+    display: none;
+  }
 `;
 
 export const Button = styled(GlobalButton)``;

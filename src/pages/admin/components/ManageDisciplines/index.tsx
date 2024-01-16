@@ -1,14 +1,13 @@
-import { Spinner } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
 import * as S from "./styles";
 import useFetchDisciplinesNames from "../../../../hooks/useFetchDisciplinesNames";
 import { CurrentUser } from "../../../../context/authContext";
 import useFetchDisciplines from "../../../../hooks/useFetchDisciplines";
-import DefaultModal from "../Modal";
 import RegisteredDisciplines from "./Components/RegisteredDisciplines";
 import DeleteDiscipline from "./Components/DeleteDiscipline";
 import CreateDiscipline from "./Components/CreateDisciplines";
 import AuthRedirectControl from "../AuthRedirectControl";
+import DeleteDisciplinesModal from "./Components/DeleteDisciplinesModal";
 
 export default function ManageDisciplines() {
   const [{ disciplinesNames, isDisciplinesNamesLoading }] = useFetchDisciplinesNames();
@@ -37,26 +36,15 @@ export default function ManageDisciplines() {
 
   return (
     <>
-      <DefaultModal modalOpen={confirmDeleteModal} setModalOpen={setConfirmDeleteModal}>
-        <S.ModalDiv>
-          <h3>Você irá deletar a disciplina</h3>
-          <h4>Tem certeza que deseja continuar?</h4>
-          <S.ModalButtonDiv>
-            <S.Button
-              onClick={() => {
-                setConfirmDeleteModal(false);
-                setDeleteId("");
-              }}
-            >
-              Cancelar
-            </S.Button>
-            <span>Essa ação não poderá ser desfeita e todos os artigos da disciplina serão perdidos!</span>
-            <S.ConfirmDeleteButton disabled={isDeleteButtonDisabled} onClick={(e) => handleDeleteDiscipline(e)}>
-              {isDisciplinesLoading || isDeleteButtonDisabled ? <Spinner size="sm" /> : "Sim, tenho certeza!"}
-            </S.ConfirmDeleteButton>
-          </S.ModalButtonDiv>
-        </S.ModalDiv>
-      </DefaultModal>
+      <DeleteDisciplinesModal
+        {...{
+          confirmDeleteModal,
+          handleDeleteDiscipline,
+          isDeleteButtonDisabled,
+          isDisciplinesLoading,
+          setConfirmDeleteModal,
+        }}
+      />
       <RegisteredDisciplines
         isDisciplinesNamesLoading={isDisciplinesNamesLoading}
         disciplinesNames={disciplinesNames}

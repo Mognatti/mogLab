@@ -1,3 +1,4 @@
+import capitalizeWords from "../../../../../../functions/capitalizeWords";
 import { DisciplineNameAndId } from "../../../../../../types/globalTypes";
 
 interface DisciplineSelectorProps {
@@ -16,7 +17,7 @@ export default function DisciplineSelector({
       <option value={""}>Selecione uma disciplina</option>
       {disciplinesNames.map((discipline) => (
         <option key={discipline.id} value={discipline.title}>
-          {discipline.title}
+          {capitalizeWords(discipline.title)}
         </option>
       ))}
     </select>

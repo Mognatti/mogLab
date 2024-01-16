@@ -68,8 +68,8 @@ export default function Dashboard() {
           </S.Button>
         </>
       </DefaultModal>
-      <h2>Bem vindo{user?.displayName ? `, ${user.displayName}!` : "!"}</h2>
       <S.Form onSubmit={(e) => e.preventDefault()}>
+        <h2>Bem vindo{user?.displayName ? `, ${user.displayName}!` : "!"}</h2>
         <S.ImageContainer onClick={() => setChangePictureModal((prev) => !prev)} title="Trocar Foto">
           <S.UserImage src={user?.photoURL ?? placeholderImage} alt="profile_picture" />
           <S.PencilIconForImage size="20" />

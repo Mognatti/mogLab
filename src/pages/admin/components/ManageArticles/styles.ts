@@ -5,6 +5,9 @@ export const Container = styled(DivContainer)`
   align-items: center;
   justify-content: center;
   margin-top: 5svh;
+  @media (max-width: 600px) {
+    margin-top: 10svh;
+  }
 `;
 
 export const FieldSet = styled.fieldset`

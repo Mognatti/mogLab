@@ -5,6 +5,19 @@ import { SiBookstack } from "react-icons/si";
 import { TbWorldShare } from "react-icons/tb";
 import { PiArticleNyTimes } from "react-icons/pi";
 
+export const ThemeSwitcherContainer = styled.div`
+  position: absolute;
+  top: 5svh;
+  right: 2svw;
+  @media (max-width: 500px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 0;
+    top: 3svh;
+  }
+`;
+
 export const LinkText = styled.span`
   opacity: 0;
   transition: all 450ms ease;
@@ -12,18 +25,12 @@ export const LinkText = styled.span`
   left: -100px;
 `;
 
-export const ThemeSwitcherContainer = styled.li`
-  position: absolute;
-  top: 15px;
-  right: -97px;
-`;
-
 export const SidebarDiv = styled.div<{ path: string }>`
   display: ${(props) => (props.path.includes("admin") ? "flex" : "none")};
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  width: 4vw;
+  align-items: center;
+  width: 59px;
   height: 100vh;
   position: fixed;
   left: 0;
@@ -32,7 +39,13 @@ export const SidebarDiv = styled.div<{ path: string }>`
   background-color: ${(props) => props.theme.colors.blue[500]};
   z-index: 99;
   &:hover {
-    width: 15vw;
+    width: 15svw;
+    @media (max-width: 861px) {
+      width: 20svw;
+    }
+    @media (max-width: 640px) {
+      width: 35svw;
+    }
   }
   &:hover ${LinkText} {
     opacity: 1;
@@ -40,15 +53,11 @@ export const SidebarDiv = styled.div<{ path: string }>`
     position: relative;
     left: 0;
   }
-  &:hover ${ThemeSwitcherContainer} {
-    right: -30px;
-  }
 `;
 
 export const NavList = styled.ul`
   display: flex;
   flex-direction: column;
-  margin-left: 18px;
   gap: 5vh 0;
 `;
 

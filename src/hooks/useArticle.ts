@@ -3,7 +3,6 @@ import { ArticleProps } from "../types/globalTypes";
 
 export default function useArticle() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [responseMessage, setResponseMessage] = useState<string>("");
 
   async function postNewArticle(discipline: string, article: ArticleProps) {
     const URL = `${import.meta.env.VITE_API_BASE_URL}/disciplines/${discipline}/articles`;
@@ -22,17 +21,15 @@ export default function useArticle() {
           author: article.author,
         }),
       });
-      setResponseMessage(`Artigo cadastrado com sucesso!`);
+
       setIsLoading(false);
+      return `Artigo cadastrado com sucesso!`;
     } catch (error) {
-      setResponseMessage("Algo deu errado e o artigo não foi cadastrado!");
       console.log(error);
       setIsLoading(false);
+      return "Algo deu errado e o artigo não foi cadastrado!";
     } finally {
       setIsLoading(false);
-      setTimeout(() => {
-        setResponseMessage("");
-      }, 5000);
     }
   }
 
@@ -62,10 +59,8 @@ export default function useArticle() {
       return "Algo deu errado e o artigo não foi atualizado!";
     } finally {
       setIsLoading(false);
-      setTimeout(() => {
-        setResponseMessage("");
-      }, 5000);
+      setTimeout(() => {}, 5000);
     }
   }
-  return [{ isLoading, responseMessage, postNewArticle, updateArticle }];
+  return [{ isLoading, postNewArticle, updateArticle }];
 }

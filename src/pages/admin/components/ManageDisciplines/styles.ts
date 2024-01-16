@@ -8,17 +8,28 @@ export const RegisteredDiv = styled.div`
   justify-content: center;
   margin-top: 8svh;
   padding-bottom: 5svh;
+  @media (max-width: 500px) {
+    margin-left: 14svw;
+  }
 `;
 
 export const EditorDiv = styled.div`
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 2vw;
+  gap: 2svw;
   margin: 8svh 4svw 5svh 6svw;
   hr {
     width: 100%;
     color: ${(props) => (props.theme.title == "dark" ? props.theme.colors.yellow[800] : props.theme.colors.blue[500])};
+  }
+  @media (max-width: 1200px) {
+    display: flex;
+    flex-direction: column;
+    gap: 10svh 0;
+  }
+  @media (max-width: 500px) {
+    margin-left: 20svw;
   }
 `;
 
@@ -26,8 +37,10 @@ export const List = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  list-style: circle;
   margin-left: 1svw;
+  @media (max-width: 500px) {
+    text-align: center;
+  }
 `;
 
 export const Item = styled.li`
@@ -41,20 +54,39 @@ export const Form = styled.form`
   justify-content: space-around;
   gap: 3vh 0;
   height: 380px;
+  p {
+    text-align: justify;
+  }
   input,
   select,
   button,
+  textarea,
   p {
-    width: 67%;
-  }
-  p {
-    text-align: justify;
+    width: 65%;
   }
   h3,
   h4,
   h5 {
     text-align: center;
     margin: 0;
+  }
+  @media (max-width: 1200px) {
+    input,
+    textarea,
+    button,
+    select,
+    p {
+      width: 300px;
+    }
+  }
+  @media (max-width: 600px) {
+    input,
+    textarea,
+    button,
+    select,
+    p {
+      width: 250px;
+    }
   }
 `;
 
@@ -74,9 +106,9 @@ export const ModalDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
   height: 100%;
-  margin: 3svh 3svw;
   gap: 3svh;
 
   h3 {

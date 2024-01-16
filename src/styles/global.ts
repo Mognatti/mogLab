@@ -33,10 +33,7 @@ a{
     }
    }
 
- img{
-  display: block;
-  max-width: 100%;
- }
+ 
 /* TinyMCE */
   .tox .tox-statusbar__branding svg{
     display: none;

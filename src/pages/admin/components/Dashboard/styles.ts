@@ -14,6 +14,9 @@ export const InputModal = styled(GlobalInput)`
   &:focus {
     transform: none;
   }
+  @media (max-width: 420px) {
+    width: 250px;
+  }
 `;
 
 //End of Modal -------------------------
@@ -25,7 +28,7 @@ export const Form = styled.form`
   justify-content: center;
   width: 100%;
   gap: 5vh 2vw;
-  margin-top: 10vh;
+  margin-top: 5vh;
 `;
 
 export const ImageContainer = styled.div`
@@ -42,6 +45,7 @@ export const UserImage = styled.img`
   width: 15svw;
   transition: 350ms;
   border-radius: 30%;
+  min-width: 200px;
 `;
 
 export const PencilIconForImage = styled(HiOutlinePencilSquare)`
@@ -104,4 +108,5 @@ export const ButtonContainer = styled.div`
 
 export const Button = styled(GlobalButton)`
   width: 10%;
+  min-width: 250px;
 `;

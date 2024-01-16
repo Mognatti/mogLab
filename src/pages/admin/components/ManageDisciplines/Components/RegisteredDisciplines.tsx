@@ -16,7 +16,9 @@ export default function RegisteredDisciplines({ isDisciplinesNamesLoading, disci
         {isDisciplinesNamesLoading ? (
           <Spinner size="sm" />
         ) : (
-          disciplinesNames.map((discipline) => <S.Item key={discipline.id}>{capitalizeWords(discipline.title)}</S.Item>)
+          disciplinesNames.map((discipline) => (
+            <S.Item key={discipline.id}>| {capitalizeWords(discipline.title)} |</S.Item>
+          ))
         )}
       </S.List>
     </S.RegisteredDiv>

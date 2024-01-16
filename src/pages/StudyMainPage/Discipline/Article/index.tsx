@@ -7,6 +7,10 @@ import { FaArrowUp } from "react-icons/fa";
 
 const Container = styled.div`
   margin: 3svh 1svw;
+  img {
+    max-width: 100%;
+    height: fit-content;
+  }
 `;
 const Title = styled.h3`
   text-align: center;

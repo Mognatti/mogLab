@@ -38,19 +38,21 @@ export interface SidebarProps {
 export default function Sidebar({ theme, setTheme }: Readonly<SidebarProps>) {
   const path = useLocation();
   return (
-    <S.SidebarDiv path={path.pathname}>
-      <S.NavList>
-        {navLinks.map((link) => (
-          <S.NavLink to={link.to} key={link.id}>
-            <span>{link.icon} </span>
-            <S.LinkText>{link.text}</S.LinkText>
-          </S.NavLink>
-        ))}
-        <S.ThemeSwitcherContainer>
-          <ThemeSwitcher {...{ theme, setTheme }} />
-        </S.ThemeSwitcherContainer>
-      </S.NavList>
-      <Outlet />
-    </S.SidebarDiv>
+    <>
+      <S.ThemeSwitcherContainer>
+        <ThemeSwitcher {...{ theme, setTheme }} />
+      </S.ThemeSwitcherContainer>
+      <S.SidebarDiv path={path.pathname}>
+        <S.NavList>
+          {navLinks.map((link) => (
+            <S.NavLink to={link.to} key={link.id}>
+              <span>{link.icon} </span>
+              <S.LinkText>{link.text}</S.LinkText>
+            </S.NavLink>
+          ))}
+        </S.NavList>
+        <Outlet />
+      </S.SidebarDiv>
+    </>
   );
 }
