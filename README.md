@@ -1,5 +1,5 @@
 <h1 align='center'>MogLab - A Comunidade Científica Descomplicada</h1>
-<div id='desc'>
+<div id='desc' align='justify'>
    <h4>Bem-Vindo(a) à Moglab!</h4>
    <p>Esse é o repositório do meu meior projeto de 2023/2024, uma aplicação Full-Stack que integra meus conhecimentos de Node.js, React.ts, Firebase e estrutura e modelagem de dados!</p>
    <p>Foram muitas horas de trabalho, mas o projeto está finalmente finalizado (se é que um desenvolvedor consegue realmente considerar um projeto como finalizado 😅)</p>
