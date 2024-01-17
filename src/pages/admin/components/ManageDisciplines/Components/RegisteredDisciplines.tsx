@@ -14,10 +14,14 @@ export default function RegisteredDisciplines({ isDisciplinesNamesLoading, disci
       <h3>Disciplinas Cadastradas</h3>
       <S.List>
         {isDisciplinesNamesLoading ? (
-          <Spinner size="sm" />
+          <div style={{ display: "flex", justifyContent: "center", gridColumnStart: "2" }}>
+            <Spinner size="sm" />
+          </div>
         ) : (
           disciplinesNames.map((discipline) => (
-            <S.Item key={discipline.id}>| {capitalizeWords(discipline.title)} |</S.Item>
+            <S.Item key={discipline.id}>
+              <p>{capitalizeWords(discipline.title)}</p>
+            </S.Item>
           ))
         )}
       </S.List>

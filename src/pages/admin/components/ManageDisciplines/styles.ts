@@ -34,17 +34,42 @@ export const EditorDiv = styled.div`
 `;
 
 export const List = styled.ul`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3svh 3svw;
+  padding: 0 8svw;
+  width: 100%;
+  align-items: center;
   justify-content: center;
-  margin-left: 1svw;
+  margin-top: 2svh;
   @media (max-width: 500px) {
-    text-align: center;
+    margin-right: 24px;
+    margin-left: 7svw;
+    font-size: 0.9em;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 4svw;
   }
 `;
 
 export const Item = styled.li`
-  margin-left: 1.5svw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid
+    ${(props) => (props.theme.title === "dark" ? props.theme.colors.green[200] : props.theme.colors.blue[500])};
+  border-top: 1px solid
+    ${(props) => (props.theme.title === "dark" ? props.theme.colors.green[200] : props.theme.colors.blue[500])};
+  text-align: center;
+  height: 50px;
+  p {
+    margin: 0;
+  }
+  @media (max-width: 500px) {
+    height: 65px;
+    border: none;
+    outline: 1px solid
+      ${(props) => (props.theme.title === "dark" ? props.theme.colors.green[200] : props.theme.colors.blue[500])};
+  }
 `;
 
 export const Form = styled.form`
