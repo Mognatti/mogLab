@@ -22,7 +22,7 @@ export default function ManageArticles() {
           Criar artigo
         </S.NavLink>
         <S.NavLink id="edit-article" onClick={() => setCreateArticle(false)}>
-          Editar artigo
+          Editar/Excluir artigo
         </S.NavLink>
       </S.FieldSet>
       {createArticle ? <CreateArticles {...{ disciplinesNames }} /> : <EditArticles {...{ disciplinesNames }} />}

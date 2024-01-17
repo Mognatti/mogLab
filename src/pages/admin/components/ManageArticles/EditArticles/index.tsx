@@ -8,16 +8,18 @@ import * as S from "../components/sharedStyles";
 import { DisciplineNameAndId } from "../../../../../types/globalTypes";
 import ArticleSelector from "../components/ArticleSelector";
 import capitalizeWords from "../../../../../functions/capitalizeWords";
+import DefaultModal from "../../Modal";
 
 interface EditArticlesProps {
   disciplinesNames: DisciplineNameAndId[];
 }
 
 export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
+  const [{ articleList, fetchArticles, isArticlesListLoading }] = useFetchArticles();
+  const [{ isLoading, updateArticle, deleteArticle }] = useArticle();
   const [selectedArticle, setSelectedArticle] = useState<string>("");
   const [selectedDiscipline, setSelectedDiscipline] = useState<string>("");
-  const [{ articleList, fetchArticles, isArticlesListLoading }] = useFetchArticles();
-  const [{ isLoading, updateArticle }] = useArticle();
+  const [confirmDeletion, setConfirmDeletion] = useState(false);
   const selectedArticleData = articleList.find((item) => item.id === selectedArticle);
   const [newContent, setNewContent] = useState(selectedArticleData?.content ?? "");
   const [newTitle, setNewTitle] = useState(selectedArticleData?.title ?? "");
@@ -43,7 +45,7 @@ export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
     setNewContent("");
     setNewTitle("");
     setSelectedArticle("");
-  }, [articleList]);
+  }, [articleList, selectedDiscipline]);
 
   async function saveData(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
@@ -96,34 +98,50 @@ export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
   ];
 
   return (
-    <S.Form>
-      <h3>Editor de Artigos</h3>
-      <DisciplineSelector {...{ disciplinesNames, selectedDiscipline, setSelectedDiscipline }} />
-      <ArticleSelector {...{ articleList, isArticlesListLoading, selectedArticle, setSelectedArticle }} />
-      <S.InputAndLabelContainer>
-        {inputs.map((item) => (
-          <S.InputAndLabelDiv key={item.id}>
-            {item.label}
-            <S.Input
-              id={item.id}
-              value={item.value}
-              onChange={(e) => updateValue(e, item.setter, item.id)}
-              placeholder={item.placeholder}
-              disabled={!selectedArticle}
-            />
-          </S.InputAndLabelDiv>
-        ))}
-      </S.InputAndLabelContainer>
-      <TextEditor
-        textValue={newContent}
-        setTextValue={setNewContent}
-        defaultValue={selectedArticleData?.content ?? ""}
-      />
-      <S.ButtonContainer>
-        <S.Button disabled={!selectedArticle} onClick={(e) => saveData(e)}>
-          {isLoading ? <Spinner /> : "Salvar Alterações"}
+    <>
+      <S.Form>
+        <h3>Editor de Artigos</h3>
+        <DisciplineSelector {...{ disciplinesNames, selectedDiscipline, setSelectedDiscipline }} />
+        <ArticleSelector {...{ articleList, isArticlesListLoading, selectedArticle, setSelectedArticle }} />
+        <S.InputAndLabelContainer>
+          {inputs.map((item) => (
+            <S.InputAndLabelDiv key={item.id}>
+              {item.label}
+              <S.Input
+                id={item.id}
+                value={item.value}
+                onChange={(e) => updateValue(e, item.setter, item.id)}
+                placeholder={item.placeholder}
+                disabled={!selectedArticle}
+              />
+            </S.InputAndLabelDiv>
+          ))}
+        </S.InputAndLabelContainer>
+        <TextEditor
+          textValue={newContent}
+          setTextValue={setNewContent}
+          defaultValue={selectedArticleData?.content ?? ""}
+        />
+        <S.ButtonContainer>
+          <S.Button disabled={!selectedArticle} onClick={(e) => saveData(e)}>
+            {isLoading ? <Spinner size="sm" /> : "Salvar Alterações"}
+          </S.Button>
+          <S.Button type="button" disabled={!selectedArticle} onClick={() => setConfirmDeletion(true)}>
+            {isLoading ? <Spinner size="sm" /> : "Excluir Artigo"}
+          </S.Button>
+        </S.ButtonContainer>
+      </S.Form>
+      <DefaultModal modalOpen={confirmDeletion} setModalOpen={setConfirmDeletion}>
+        <h3>Essa ação não poderá ser desfeita!</h3>
+        <p>Todos os dados desse artigo serão perdidos. Deseja prosseguir?</p>
+        <S.Button onClick={() => setConfirmDeletion(false)}>Cancelar</S.Button>
+        <S.Button
+          disabled={!selectedArticleData}
+          onClick={(e) => deleteArticle(e, selectedDiscipline, selectedArticleData!.id!)}
+        >
+          {isLoading ? <Spinner size="sm" /> : "Sim - excluir artigo"}
         </S.Button>
-      </S.ButtonContainer>
-    </S.Form>
+      </DefaultModal>
+    </>
   );
 }

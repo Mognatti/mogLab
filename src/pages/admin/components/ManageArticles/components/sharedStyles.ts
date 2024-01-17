@@ -42,5 +42,6 @@ export const Input = styled(GlobalInput)`
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
+  gap: 0 3svw;
 `;
 export const Button = styled(GlobalButton)``;

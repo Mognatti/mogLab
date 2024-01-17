@@ -62,5 +62,29 @@ export default function useArticle() {
       setTimeout(() => {}, 5000);
     }
   }
-  return [{ isLoading, postNewArticle, updateArticle }];
+
+  async function deleteArticle(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    discipline: string,
+    articleId: string
+  ) {
+    e.preventDefault();
+    const URL = `${import.meta.env.VITE_API_BASE_URL}/disciplines/${discipline}/articles/${articleId}`;
+    try {
+      setIsLoading(true);
+      const res = await fetch(URL, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        setIsLoading(false);
+        alert("Artigo deletado com sucesso!");
+        window.location.reload();
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      alert("Algo deu errado ao deletar a disciplina!");
+    }
+  }
+  return [{ isLoading, postNewArticle, updateArticle, deleteArticle }];
 }
