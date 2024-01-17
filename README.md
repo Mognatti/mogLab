@@ -44,4 +44,6 @@
 <img src='src/assets/github_preview/Manage_Articles_Create_Preview.png' alt='create article preview ' />
 <h3 align='center'>Editar Artigos</h3>
 <img src='src/assets/github_preview/Manage_Articles_Edit_Preview.png' alt='edit article preview ' />
+<h3 align='center'>Not Found</h3>
+<img src='src/assets/github_preview/Not_Found.png' alt='not found preview ' />
 </div>
