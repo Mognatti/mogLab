@@ -37,8 +37,12 @@ export const TiltDiv = styled(Tilt)`
 `;
 
 export const Card = styled.li`
+  display: flex;
+  flex-direction: column;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
   position: relative;
-  width: 100%;
+  max-width: 100%;
   height: 275px;
   text-align: justify;
   padding: 16px;
@@ -57,11 +61,6 @@ export const Card = styled.li`
 `;
 
 export const AuthorContainer = styled.div`
-  position: absolute;
-  display: flex;
-  width: 100%;
-  right: 4svw;
-  bottom: 4svw;
   align-items: flex-end;
   justify-content: flex-end;
 `;
