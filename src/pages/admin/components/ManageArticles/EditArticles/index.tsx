@@ -38,7 +38,12 @@ export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDiscipline]);
 
-  useEffect(() => {}, [articleList]);
+  useEffect(() => {
+    setNewAuthor("");
+    setNewContent("");
+    setNewTitle("");
+    setSelectedArticle("");
+  }, [articleList]);
 
   async function saveData(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
@@ -115,7 +120,7 @@ export default function EditArticles({ disciplinesNames }: EditArticlesProps) {
         defaultValue={selectedArticleData?.content ?? ""}
       />
       <S.ButtonContainer>
-        <S.Button disabled={!newAuthor || !newTitle} onClick={(e) => saveData(e)}>
+        <S.Button disabled={!selectedArticle} onClick={(e) => saveData(e)}>
           {isLoading ? <Spinner /> : "Salvar Alterações"}
         </S.Button>
       </S.ButtonContainer>
