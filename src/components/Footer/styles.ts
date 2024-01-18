@@ -9,7 +9,6 @@ export const FooterContainer = styled.footer`
 `;
 
 export const Content = styled.div`
-  margin-left: 4vw;
   font-size: 1.1em;
   display: flex;
   flex-direction: column;
