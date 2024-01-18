@@ -7,6 +7,7 @@ import { FaArrowUp } from "react-icons/fa";
 
 const Container = styled.div`
   margin: 3svh 1svw;
+  min-height: 80svh;
   img {
     max-width: 100%;
     height: fit-content;
