@@ -20,7 +20,6 @@ export default function Header({ theme, setTheme }: Readonly<HeaderProps>) {
   const { user } = useContext(CurrentUser);
   const [showHamburguerList, setShowHamburguerList] = useState(false);
   const showHamburguer = windowWidth <= showHamburguerWidth;
-  console.log(showHamburguerList);
 
   return (
     <>

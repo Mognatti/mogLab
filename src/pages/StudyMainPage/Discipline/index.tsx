@@ -2,9 +2,10 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useFetchDisciplines from "../../../hooks/useFetchDisciplines";
 import Loader from "../../Loader";
 import NotFound from "../../NotFound";
-import { ArticleProps } from "../../../types/globalTypes";
+import { ArticleProps, DisciplinesProps } from "../../../types/globalTypes";
 import * as S from "./styles";
 import capitalizeWords from "../../../functions/capitalizeWords";
+import { useEffect, useState } from "react";
 
 interface DisciplineProps {
   setSelectedArticle: React.Dispatch<React.SetStateAction<ArticleProps | undefined>>;
@@ -13,16 +14,24 @@ interface DisciplineProps {
 export default function Discipline({ setSelectedArticle }: DisciplineProps) {
   const [{ disciplines, isDisciplinesLoading }] = useFetchDisciplines();
   const { discipline } = useParams();
-  const selectedDiscipline = disciplines.find((item) => item.title.toLowerCase() === discipline);
-  const articleList = selectedDiscipline?.articles;
   const navigate = useNavigate();
   const location = useLocation();
+  const [selectedDiscipline, setSelectedDiscipline] = useState<DisciplinesProps | undefined>();
+  const articleList = selectedDiscipline?.articles;
+
+  useEffect(() => {
+    const formattedDiscipline = discipline?.toLowerCase().trim();
+    const foundDiscipline = disciplines.find((item) => item.title.toLowerCase().trim() === formattedDiscipline);
+    setSelectedDiscipline(foundDiscipline);
+  }, [discipline, disciplines]);
 
   if (isDisciplinesLoading) {
     return <Loader />;
-  } else if (!selectedDiscipline) {
+  }
+  if (!selectedDiscipline) {
     return <NotFound />;
-  } else if (articleList?.length == 0) {
+  }
+  if (articleList?.length == 0) {
     return (
       <S.Container>
         <S.Warning>A disciplina ainda não possui artigos cadastrados, aguarde atualizações!</S.Warning>
