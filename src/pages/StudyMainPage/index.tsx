@@ -1,6 +1,5 @@
 import * as S from "./styles";
 import * as GS from "../../styles/global";
-import BiologyRoute from "./components/BiologyRoute";
 import useFetchDisciplinesNames from "../../hooks/useFetchDisciplinesNames";
 import Loader from "../Loader";
 import capitalizeWords from "../../functions/capitalizeWords";
@@ -30,7 +29,17 @@ export default function StudyMainPage() {
         ))}
       </S.List>
       <hr />
-      <BiologyRoute />
+      <S.WIPContainer>
+        <S.Disclaimer>
+          Este site é um projeto em desenvolvimento. Novas disciplinas e conteúdos serão adicionados com o tempo, de
+          forma a atender as demandas da grade curricular dos cursos da saúde, com ênfase na biomedicina.
+        </S.Disclaimer>
+        <S.CogContainer>
+          <S.CogIcon size="80" />
+          <S.SecondCogIcon size="60" />
+        </S.CogContainer>
+      </S.WIPContainer>
+      {/* <BiologyRoute />  still WIP*/}
     </S.MainContainer>
   );
 }
