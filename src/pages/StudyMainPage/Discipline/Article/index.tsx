@@ -20,17 +20,31 @@ const ArticleContent = styled.div`
   text-align: justify !important;
   margin: 4svh 2svw;
   padding-bottom: 2svh;
+  color: ${(props) =>
+    props.theme.title == "dark" ? props.theme.colors.white[500] : props.theme.colors.black[500]} !important;
   ul {
     display: flex;
     flex-direction: column;
     gap: 1em 0;
+    color: ${(props) =>
+      props.theme.title == "dark" ? props.theme.colors.white[500] : props.theme.colors.black[500]} !important;
+
     li {
       text-align: justify !important;
       padding-left: 1.5em;
+      margin: 0;
+      color: ${(props) =>
+        props.theme.title == "dark" ? props.theme.colors.white[500] : props.theme.colors.black[500]} !important;
     }
   }
   img {
     padding: 0.4em 0;
+  }
+  a {
+    border-bottom: 1px solid ${(props) => props.theme.colors.yellow[500]};
+    &:hover {
+      padding: 0px 2px;
+    }
   }
 `;
 const AuthorParagraph = styled.p`
