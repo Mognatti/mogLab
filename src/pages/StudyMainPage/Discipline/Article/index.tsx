@@ -17,7 +17,7 @@ const Title = styled.h3`
   text-align: center;
 `;
 const ArticleContent = styled.div`
-  text-align: justify;
+  text-align: justify !important;
   margin: 4svh 2svw;
   padding-bottom: 2svh;
   ul {
@@ -25,6 +25,7 @@ const ArticleContent = styled.div`
     flex-direction: column;
     gap: 1em 0;
     li {
+      text-align: justify !important;
       padding-left: 1.5em;
     }
   }
