@@ -20,6 +20,17 @@ const ArticleContent = styled.div`
   text-align: justify;
   margin: 4svh 2svw;
   padding-bottom: 2svh;
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1em 0;
+    li {
+      padding-left: 1.5em;
+    }
+  }
+  img {
+    padding: 0.4em 0;
+  }
 `;
 const AuthorParagraph = styled.p`
   text-align: end;
