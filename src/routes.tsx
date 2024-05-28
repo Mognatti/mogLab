@@ -22,7 +22,9 @@ import Sidebar from "./pages/admin/components/Sidebar";
 export default function AppRoutes() {
   const [{ theme, setTheme }] = useTheme(themeKey, lightTheme);
   const [selectedArticle, setSelectedArticle] = useState<ArticleProps | undefined>();
-
+  const ReuseSidebar = {
+    JSX: <Sidebar {...{ setTheme, theme }} />,
+  };
   const HeaderAndFooter = {
     JSX: (
       <>
@@ -31,7 +33,6 @@ export default function AppRoutes() {
       </>
     ),
   };
-
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -49,7 +50,7 @@ export default function AppRoutes() {
             path="/admin"
             element={
               <>
-                <Sidebar {...{ theme, setTheme }} />
+                {ReuseSidebar.JSX}
                 <Admin />
               </>
             }
@@ -58,7 +59,7 @@ export default function AppRoutes() {
             path="/admin/disciplinas"
             element={
               <>
-                <Sidebar {...{ theme, setTheme }} />
+                {ReuseSidebar.JSX}
                 <ManageDisciplines />
               </>
             }
@@ -67,7 +68,7 @@ export default function AppRoutes() {
             path="/admin/artigos"
             element={
               <>
-                <Sidebar {...{ theme, setTheme }} />
+                {ReuseSidebar.JSX}
                 <ManageArticles />{" "}
               </>
             }
