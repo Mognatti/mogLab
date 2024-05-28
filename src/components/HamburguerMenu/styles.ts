@@ -70,43 +70,46 @@ export const HamburguerSVG = styled.svg<{ scrolling: boolean }>`
 `;
 
 export const HamburguerLines = styled.rect<{ active: boolean }>`
-  transition: ${(props) =>
-    props.active
-      ? "y 350ms ease-in-out, rotate 350ms ease-in-out 350ms, opacity 350ms, x 350ms"
-      : "y 350ms ease-in-out 350ms, rotate 350ms ease-in-out, opacity 350ms, x 450ms 350ms"};
   transform-origin: center;
+  transition: ${(props) =>
+    props.active ? "transform 350ms ease-in-out, opacity 350ms" : "transform 350ms ease-in-out 350ms, opacity 350ms"};
+
   ${(props) =>
     props.active
-      ? ` &:nth-of-type(1) {
-      y: 45;
-      rotate: 45deg;
-    }
-    &:nth-of-type(2) {
-      opacity:0;
-      x:200;
-      
-    }
-    &:nth-of-type(3) {
-      y: 45;
-      rotate: -45deg;
-    }`
-      : css`
+      ? css`
+          &:nth-of-type(1) {
+            transform: translateY(10px) rotate(45deg);
+          }
           &:nth-of-type(2) {
+            opacity: 0;
+            transform: translateX(200px);
+          }
+          &:nth-of-type(3) {
+            transform: translateY(-20px) rotate(-45deg);
+          }
+        `
+      : css`
+          &:nth-of-type(1) {
+            transform: translateY(0) rotate(0);
+          }
+          &:nth-of-type(2) {
+            opacity: 1;
             animation: ${goLeft} 350ms ease-in-out 450ms;
+          }
+          &:nth-of-type(3) {
+            transform: translateY(0) rotate(0);
           }
         `}
 `;
 
 const goLeft = keyframes`
-0%{
-x:200;
-}
-
-70%{
-x:5;
-}
-
-100%{
-x:10;
-}
+  0% {
+    transform: translateX(200px);
+  }
+  70% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(10px);
+  }
 `;
