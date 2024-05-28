@@ -15,7 +15,7 @@ export const HamburguerList = styled.ul<{ show: boolean }>`
   padding: 16px;
   border-radius: 8px;
   width: 180px;
-  height: 20svh;
+  height: 22svh;
   z-index: 1;
 `;
 
@@ -25,16 +25,20 @@ export const HamburguerNavLink = styled(StyledLink)<{ show: boolean }>`
   transition: 350ms ease-in-out;
   left: ${(props) => (props.show ? "5svw" : "100svw")};
   &:nth-of-type(1) {
+    top: 2vh;
     top: 2svh;
   }
   &:nth-of-type(2) {
+    top: 6vh;
     top: 6svh;
   }
   &:nth-of-type(3) {
+    top: 10vh;
     top: 10svh;
     width: 100%;
   }
   &:nth-of-type(4) {
+    top: 14vh;
     top: 14svh;
     width: 100%;
   }
@@ -49,7 +53,7 @@ export const HamburguerButton = styled.button`
   background: transparent;
   border-radius: 1rem;
   border: none;
-  width: 45px;
+  width: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;

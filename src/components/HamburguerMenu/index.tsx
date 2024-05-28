@@ -17,7 +17,7 @@ export default function HamburguerMenu({ setShowHamburguerList, showHamburguerLi
         aria-expanded={showHamburguerList}
         onClick={() => setShowHamburguerList((prev) => !prev)}
       >
-        <S.HamburguerSVG scrolling={Ypos > 0} viewBox="0 0 100 100" width={40}>
+        <S.HamburguerSVG scrolling={Ypos > 0} viewBox="0 0 100 100" width={35}>
           <S.HamburguerLines active={showHamburguerList} className="top" width={60} height={10} x={20} y={25} rx="5" />
           <S.HamburguerLines
             active={showHamburguerList}
