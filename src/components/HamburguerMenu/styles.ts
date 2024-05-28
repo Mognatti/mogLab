@@ -90,12 +90,14 @@ export const HamburguerLines = styled.rect<{ active: boolean }>`
       y: 45;
       rotate: -45deg;
     }`
-      : css`&:nth-of-type(2) {
-        animation: ${test} 350ms ease-in-out 450ms
+      : css`
+          &:nth-of-type(2) {
+            animation: ${goLeft} 350ms ease-in-out 450ms;
+          }
         `}
 `;
 
-const test = keyframes`
+const goLeft = keyframes`
 0%{
 x:200;
 }
