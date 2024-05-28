@@ -8,6 +8,7 @@ import { useContext, useState } from "react";
 import { CurrentUser } from "../../context/authContext";
 import BreadCrumbs from "../BreadCrumbs";
 import useWindowSize from "../../hooks/useWindowSize";
+import HamburguerMenu from "../HamburguerMenu";
 
 interface HeaderProps {
   theme: DefaultTheme;
@@ -26,22 +27,7 @@ export default function Header({ theme, setTheme }: Readonly<HeaderProps>) {
       {showHamburguer ? (
         <S.PageHeader scrolling={Ypos > 0}>
           <S.Title scrolling={Ypos > 0}>MogLab</S.Title>
-          <S.HamburgerMenu size="25" onClick={() => setShowHamburguerList((prev) => !prev)} scrolling={Ypos > 0} />
-          <S.HamburguerList show={showHamburguerList}>
-            {navLinks.map((link) => (
-              <S.HamburguerNavLink
-                key={link.id}
-                to={link.to}
-                show={showHamburguerList}
-                onClick={() => setShowHamburguerList(false)}
-              >
-                {link.name}
-              </S.HamburguerNavLink>
-            ))}
-            <S.HamburguerNavLink to="/login" show={showHamburguerList} onClick={() => setShowHamburguerList(false)}>
-              {user ? "Dashboard" : "Login"}
-            </S.HamburguerNavLink>
-          </S.HamburguerList>
+          <HamburguerMenu {...{ Ypos, setShowHamburguerList, showHamburguerList, user }} />
           <ThemeSwitcher {...{ theme, setTheme }} />
         </S.PageHeader>
       ) : (

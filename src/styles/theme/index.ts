@@ -59,7 +59,7 @@ export const lightTheme = {
   },
 };
 
-export const DarkTheme = {
+export const darkTheme = {
   title: "dark",
   colors: {
     white: {
