@@ -11,11 +11,14 @@ export const MainContainer = styled.div`
   border-bottom: 1px solid;
   flex-wrap: wrap;
   @media (max-width: 1030px) {
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
     text-align: center;
-    div {
-      margin-bottom: -20svh;
-    }
+  }
+  @media (max-width: 600px) {
+  }
+  @media (max-width: 450px) {
+    height: 70vh;
   }
 `;
 
@@ -29,7 +32,16 @@ export const HomeSubtitle = styled.p`
 `;
 
 export const HomeImage = styled.img`
-  width: 500px;
+  width: 35vw;
+  @media (max-width: 1030px) {
+    width: 60vw;
+  }
+  @media (max-width: 500px) {
+    width: 70vw;
+  }
+  @media (max-width: 431px) {
+    width: 80%;
+  }
 `;
 
 export const Container = styled.div`
